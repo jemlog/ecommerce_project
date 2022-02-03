@@ -3,6 +3,8 @@ package project.finaltoyproject.web.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import project.finaltoyproject.domain.user.dto.ProfileResponseDto;
+import project.finaltoyproject.util.exeption.SessionRemoveException;
 import project.finaltoyproject.web.auth.SessionConst;
 import project.finaltoyproject.domain.user.User;
 import project.finaltoyproject.domain.user.dto.LoginDto;
@@ -61,5 +63,17 @@ public class LoginController {
     public String healthCheck()
     {
         return "login";
+    }
+
+    @GetMapping("/auth/profile")
+    public ProfileResponseDto profileInfo(@Login User loginUser) throws Exception
+    {
+        User user = userService.findById(loginUser.getId());
+        if(user == null)
+        {
+            throw new SessionRemoveException("인증되지 않은 사용자입니다.");
+        }
+
+        return new ProfileResponseDto(user);
     }
 }
