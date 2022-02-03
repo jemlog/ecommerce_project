@@ -32,8 +32,13 @@ public class UserService {
         }
     }
 
-    public User findByEmailForLogin(String email,String password) {
+    public User findByEmail(String email,String password) {
         return userRepository.findByEmail(email).filter(u -> u.getPassword().equals(password))
                 .orElse(null);
+    }
+
+    public User findById(Long id)
+    {
+        return userRepository.findById(id).orElse(null);
     }
 }

@@ -1,13 +1,12 @@
-package project.finaltoyproject.controller;
+package project.finaltoyproject.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import project.finaltoyproject.auth.SessionConst;
+import project.finaltoyproject.web.auth.SessionConst;
 import project.finaltoyproject.domain.user.User;
 import project.finaltoyproject.domain.user.dto.LoginDto;
 import project.finaltoyproject.domain.user.dto.UserRequestDto;
-import project.finaltoyproject.domain.user.repository.UserRepository;
 import project.finaltoyproject.service.UserService;
 import project.finaltoyproject.util.exeption.DuplicatedEmailException;
 import project.finaltoyproject.util.exeption.UserNotExistException;
@@ -40,19 +39,27 @@ public class LoginController {
     public String login(@RequestBody LoginDto loginDto, HttpServletRequest request) throws UserNotExistException {
 
         // login user 찾기
-        User findUser = userService.findByEmailForLogin(loginDto.getEmail(),loginDto.getPassword());
+        User findUser = userService.findByEmail(loginDto.getEmail(),loginDto.getPassword());
         if(findUser == null)
         {
             throw new UserNotExistException("존재하지 않는 회원입니다.");
         }
         HttpSession session = request.getSession();
-        session.setAttribute(SessionConst.AUTH_NAME,findUser.getId());
+        session.setAttribute(SessionConst.AUTH_NAME,findUser);
         return "login success";
     }
-//
-//    @GetMapping("/auth/logout")
-//    public String logout()
-//    {
-//
-//    }
+
+    @GetMapping("/auth/logout")
+    public String logout(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession(false);
+        session.invalidate();
+        return "logout success";
+    }
+
+    @GetMapping("/auth/health")
+    public String healthCheck()
+    {
+        return "login";
+    }
 }

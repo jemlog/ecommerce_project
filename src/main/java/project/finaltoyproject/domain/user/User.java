@@ -1,10 +1,14 @@
 package project.finaltoyproject.domain.user;
 
 import lombok.*;
+import project.finaltoyproject.domain.posts.Posts;
 import project.finaltoyproject.domain.user.dto.UserRequestDto;
 import project.finaltoyproject.util.BaseEntity;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 // TODO: 엔티티의 필드에 default 값 넣는 방법 알아보기
 // TODO: @Builder 사용시 enum 있으면 생성안됨
@@ -18,10 +22,11 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends BaseEntity {
+public class User extends BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     // 실제 이름
@@ -42,6 +47,9 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Grade grade;
 
+    @OneToMany(mappedBy = "user")
+    private List<Posts> postsList = new ArrayList<>();
+
     public User(UserRequestDto userRequestDto)
     {
         this.username = userRequestDto.getUsername();
@@ -50,5 +58,9 @@ public class User extends BaseEntity {
         this.password = userRequestDto.getPassword();
         this.grade = Grade.BRONZE; // 처음 가입한 회원은 무조건 BRONZE 등급부터 시작
     }
+
+
+
+
 
 }
