@@ -1,17 +1,17 @@
 spring:
-  cache:
-    type: redis
-    redis:
-      cache-null-values: true
   redis:
     host: localhost
     port: 6379
-#  session:
+  session:
+    redis:
+      flush-mode: on_save
+      namespace: spring:session
+    timeout: 600
+    store-type: redis
+#  cache:
+#    type: redis
 #    redis:
-#      flush-mode: on_save
-#      namespace: spring:session
-#    timeout: 600
-#    store-type: redis
+#      cache-null-values: true
 
   datasource:
     url: jdbc:mysql://localhost:3306/toyproject_schema?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import project.finaltoyproject.domain.user.User;
 import project.finaltoyproject.domain.user.repository.UserRepository;
 import project.finaltoyproject.util.exeption.DuplicatedEmailException;
+import project.finaltoyproject.util.exeption.UserNotExistException;
 
 import java.util.Optional;
 
@@ -29,5 +30,10 @@ public class UserService {
         {
             throw new DuplicatedEmailException("중복된 회원입니다.");
         }
+    }
+
+    public User findByEmailForLogin(String email,String password) {
+        return userRepository.findByEmail(email).filter(u -> u.getPassword().equals(password))
+                .orElse(null);
     }
 }
