@@ -21,5 +21,5 @@
 
 ### 트러블 슈팅
 
-📌 Enum과 @Builder 동시 사용시 에러 발생 
+📌 @Builder를 엔티티 클래스 레벨에 붙이면 에러 발생한다. 
 - @Builder 어노테이션을 클래스 레벨에 작성시 AutoIncrement되는 Id값 까지 builder에 포함이 되서 오류 발생한다. 
