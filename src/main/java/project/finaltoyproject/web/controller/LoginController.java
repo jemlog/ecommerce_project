@@ -18,14 +18,13 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/auth")
 public class LoginController {
 
     private final UserService userService;
 
 
-    // TODO: 회원가입, 로그인, 로그아웃 구현
-
-    @PostMapping("/auth/signup")
+    @PostMapping("/signup")
     public Long signup(@RequestBody UserRequestDto userRequestDto, BindingResult bindingResult) throws DuplicatedEmailException {
 
         // 중복되는 회원 체크
@@ -37,7 +36,7 @@ public class LoginController {
     }
 
 
-    @PostMapping("/auth/login")
+    @PostMapping("/login")
     public String login(@RequestBody LoginDto loginDto, HttpServletRequest request) throws UserNotExistException {
 
         // login user 찾기
@@ -51,7 +50,7 @@ public class LoginController {
         return "login success";
     }
 
-    @GetMapping("/auth/logout")
+    @GetMapping("/logout")
     public String logout(HttpServletRequest request)
     {
         HttpSession session = request.getSession(false);
@@ -59,13 +58,13 @@ public class LoginController {
         return "logout success";
     }
 
-    @GetMapping("/auth/health")
+    @GetMapping("/health")
     public String healthCheck()
     {
         return "login";
     }
 
-    @GetMapping("/auth/profile")
+    @GetMapping("/profile")
     public ProfileResponseDto profileInfo(@Login User loginUser) throws Exception
     {
         User user = userService.findById(loginUser.getId());
