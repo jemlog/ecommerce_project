@@ -12,5 +12,5 @@ public class PostsResponseDto {
 
     private String title;
     private String description;
-
+    private Long userId;
 }

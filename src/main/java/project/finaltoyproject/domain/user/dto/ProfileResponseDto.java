@@ -30,7 +30,8 @@ public class ProfileResponseDto {
         this.myPosts = user.getPostsList()
                 .stream().map(p -> new PostsResponseDto(
                         p.getTitle(),
-                        p.getDescription()))
+                        p.getDescription(),
+                        p.getUser().getId()))
                 .collect(Collectors.toList());
     }
 }

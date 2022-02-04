@@ -26,7 +26,7 @@ public class PostsController {
     public Page<PostsResponseDto> findAll(@PageableDefault(size = 20) Pageable pageable)
     {
             Page<Posts> posts = postService.findAll(pageable);
-            return posts.map(p -> new PostsResponseDto(p.getTitle(), p.getDescription()));
+            return posts.map(p -> new PostsResponseDto(p.getTitle(), p.getDescription(),p.getUser().getId()));
 
     }
 
@@ -47,5 +47,12 @@ public class PostsController {
         Posts savePosts = postService.save(newPosts);
 
         return savePosts.getId();
+    }
+
+    @DeleteMapping("/{id}")
+    public String deletePosts(@PathVariable("id") Long id)
+    {
+        postService.delete(id);
+        return "delete!";
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import project.finaltoyproject.domain.posts.Posts;
 import project.finaltoyproject.domain.posts.repository.PostsRepository;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -24,5 +26,12 @@ public class PostsService {
     public Posts save(Posts posts)
     {
         return postsRepository.save(posts);
+    }
+
+    @Transactional
+    public void delete(Long id)
+    {
+        Optional<Posts> findPosts = postsRepository.findById(id);
+        postsRepository.delete(findPosts.get());
     }
 }
