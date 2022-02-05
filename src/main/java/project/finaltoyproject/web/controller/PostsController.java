@@ -13,6 +13,7 @@ import project.finaltoyproject.domain.user.dto.LoginDto;
 import project.finaltoyproject.service.PostsService;
 import project.finaltoyproject.service.UserService;
 import project.finaltoyproject.util.exeption.SessionRemoveException;
+import project.finaltoyproject.util.exeption.UserNotExistException;
 
 @RestController
 @RequiredArgsConstructor
@@ -50,8 +51,7 @@ public class PostsController {
     }
 
     @DeleteMapping("/{id}")
-    public String deletePosts(@PathVariable("id") Long id)
-    {
+    public String deletePosts(@PathVariable("id") Long id) throws UserNotExistException {
         postService.delete(id);
         return "delete!";
     }

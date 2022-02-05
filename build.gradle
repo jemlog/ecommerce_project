@@ -3,6 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'java'
+
 }
 
 group = 'project'
@@ -35,8 +36,12 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+
+
 tasks.named('test') {
+
     useJUnitPlatform()
+
 }
 
 def querydslDir = "$buildDir/generated/querydsl"

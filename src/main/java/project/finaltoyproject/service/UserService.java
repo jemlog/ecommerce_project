@@ -25,14 +25,13 @@ public class UserService {
 
     public void findByEmailCheckDuplicated(String email) throws DuplicatedEmailException {
 
-        Optional<User> findUser = userRepository.findByEmail(email);
-        if(!findUser.isEmpty())
-        {
-            throw new DuplicatedEmailException("중복된 회원입니다.");
-        }
+        userRepository.findByEmail(email)
+                .orElseThrow(()->new DuplicatedEmailException("중복된 회원입니다."));
+
     }
 
     public User findByEmail(String email,String password) {
+
         return userRepository.findByEmail(email).filter(u -> u.getPassword().equals(password))
                 .orElse(null);
     }

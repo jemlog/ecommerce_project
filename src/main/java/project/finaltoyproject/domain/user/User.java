@@ -1,6 +1,7 @@
 package project.finaltoyproject.domain.user;
 
 import lombok.*;
+import project.finaltoyproject.domain.order.Order;
 import project.finaltoyproject.domain.posts.Posts;
 import project.finaltoyproject.domain.user.dto.UserRequestDto;
 import project.finaltoyproject.util.BaseEntity;
@@ -49,6 +50,9 @@ public class User extends BaseEntity implements Serializable {
 
     @OneToMany(mappedBy = "user")
     private List<Posts> postsList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orderList = new ArrayList<>();
 
     public User(UserRequestDto userRequestDto)
     {

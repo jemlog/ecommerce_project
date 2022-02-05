@@ -25,7 +25,7 @@ public class LoginController {
 
 
     @PostMapping("/signup")
-    public Long signup(@RequestBody UserRequestDto userRequestDto, BindingResult bindingResult) throws DuplicatedEmailException {
+    public Long signup(@RequestBody UserRequestDto userRequestDto, BindingResult bindingResult) throws Exception {
 
         // 중복되는 회원 체크
         userService.findByEmailCheckDuplicated(userRequestDto.getEmail());
