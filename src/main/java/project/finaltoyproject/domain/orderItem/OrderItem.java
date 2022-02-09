@@ -29,4 +29,21 @@ public class OrderItem extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
+
+    public OrderItem(int orderPrice, int orderQuantity, Item item)
+    {
+        this.orderPrice = orderPrice;
+        this.orderQuantity = orderQuantity;
+        this.item = item;
+    }
+
+    public static OrderItem createOrderItem(int orderQauntity, Item item)
+    {
+        OrderItem orderItem = new OrderItem(item.getPrice(),orderQauntity,item);
+        // TODO: item의 수량 줄이기
+        item.minusQuantity(orderQauntity);
+        return orderItem;
+
+    }
+
 }

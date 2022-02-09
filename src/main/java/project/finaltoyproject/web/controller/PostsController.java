@@ -12,6 +12,7 @@ import project.finaltoyproject.domain.user.User;
 import project.finaltoyproject.domain.user.dto.LoginDto;
 import project.finaltoyproject.service.PostsService;
 import project.finaltoyproject.service.UserService;
+import project.finaltoyproject.util.exeption.ClientInvalidInputException;
 import project.finaltoyproject.util.exeption.SessionRemoveException;
 import project.finaltoyproject.util.exeption.UserNotExistException;
 
@@ -32,7 +33,7 @@ public class PostsController {
     }
 
     @PostMapping
-    public Long savePosts(@Login User loginUser, @RequestBody PostsRequestDto postsRequestDto) throws SessionRemoveException {
+    public String savePosts(@Login User loginUser, @RequestBody PostsRequestDto postsRequestDto) throws SessionRemoveException {
         User user = userService.findById(loginUser.getId());
         if(user == null)
         {
@@ -47,11 +48,11 @@ public class PostsController {
 
         Posts savePosts = postService.save(newPosts);
 
-        return savePosts.getId();
+        return savePosts.getTitle();
     }
 
     @DeleteMapping("/{id}")
-    public String deletePosts(@PathVariable("id") Long id) throws UserNotExistException {
+    public String deletePosts(@PathVariable("id") Long id) throws ClientInvalidInputException {
         postService.delete(id);
         return "delete!";
     }

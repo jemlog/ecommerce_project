@@ -1,6 +1,7 @@
 package project.finaltoyproject.domain.item;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.finaltoyproject.domain.orderItem.OrderItem;
@@ -25,10 +26,26 @@ public class Item extends BaseEntity {
 
     private int price;
 
+    public void minusQuantity(int quantity)
+    {
+        this.quantity -= quantity;
+        if(this.quantity < 0){
+            throw new IllegalStateException("개수가 0개 이하로 내려가면 안됩니다");
+        }
+    }
+
+    public void addQuantity(int quantity)
+    {
+        this.quantity += quantity;
+    }
+
+    @Builder
+    public Item(String itemName,int quantity,int price)
+    {
+        this.itemName = itemName;
+        this.quantity = quantity;
+        this.price = price;
+    }
 
 
-
-
-    @OneToMany(mappedBy = "item")
-    private List<OrderItem> orderItemList = new ArrayList<>();
 }

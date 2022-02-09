@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import project.finaltoyproject.util.ErrorField;
+import project.finaltoyproject.util.exeption.ClientInvalidInputException;
 import project.finaltoyproject.util.exeption.DuplicatedEmailException;
 import project.finaltoyproject.util.exeption.SessionRemoveException;
 import project.finaltoyproject.util.exeption.UserNotExistException;
@@ -31,11 +32,20 @@ public class LoginControllerAdvice {
     }
 
     @ExceptionHandler
-    public ResponseEntity<ErrorField> userExistException(SessionRemoveException ex)
+    public ResponseEntity<ErrorField> sessionRemoveException(SessionRemoveException ex)
     {
         ErrorField errorField = new ErrorField();
         errorField.setCode("UNAUTHORIZED");
         errorField.setMessage(ex.getMessage());
         return new ResponseEntity<ErrorField>(errorField,HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorField> clientInvalidInputException(ClientInvalidInputException ex)
+    {
+        ErrorField errorField = new ErrorField();
+        errorField.setCode("WRONG INPUT");
+        errorField.setMessage(ex.getMessage());
+        return new ResponseEntity<ErrorField>(errorField,HttpStatus.BAD_REQUEST);
     }
 }
