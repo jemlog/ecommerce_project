@@ -32,10 +32,10 @@ public class Order extends BaseEntity {
 
     private int totalOrderQuantity;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    public void addOrder(User user)
+    public void addUser(User user)
     {
         user.getOrderList().add(this);
         this.user = user;
@@ -53,6 +53,11 @@ public class Order extends BaseEntity {
         this.orderState = orderState;
     }
 
+    public void addOrderItem(OrderItem orderItem)
+    {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
 
     public static Order createOrder(User user, OrderItem ...orderItems)
     {
@@ -61,8 +66,10 @@ public class Order extends BaseEntity {
         Arrays.stream(orderItems)  // 입력된 모든 orderItem들의 수량과 가격 합을 더해주는 연산
                 .forEach(orderItem -> order.addAllOrderPriceAndOrderQuantity(orderItem.getOrderPrice(),
                         orderItem.getOrderQuantity()));
-
-        order.addOrder(user); // user와 order의 연관관계 편의 메서드
+        for (OrderItem orderItem : orderItems) {
+            order.addOrderItem(orderItem);
+        }
+        order.addUser(user); // user와 order의 연관관계 편의 메서드
         return order;
     }
 

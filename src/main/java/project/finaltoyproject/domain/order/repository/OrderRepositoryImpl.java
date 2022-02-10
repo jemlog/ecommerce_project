@@ -9,11 +9,13 @@ import org.springframework.data.domain.Pageable;
 import project.finaltoyproject.domain.order.Order;
 import project.finaltoyproject.domain.order.OrderState;
 import project.finaltoyproject.domain.order.dto.OrderSearch;
+import project.finaltoyproject.domain.user.QUser;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
 import static project.finaltoyproject.domain.order.QOrder.order;
+import static project.finaltoyproject.domain.user.QUser.*;
 
 public class OrderRepositoryImpl implements CustomOrderRepository{
 

@@ -2,6 +2,7 @@ package project.finaltoyproject.domain.orderItem;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import project.finaltoyproject.domain.item.Item;
 import project.finaltoyproject.domain.order.Order;
 import project.finaltoyproject.util.BaseEntity;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 public class OrderItem extends BaseEntity {
 

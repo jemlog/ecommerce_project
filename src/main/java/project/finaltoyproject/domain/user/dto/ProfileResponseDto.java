@@ -3,6 +3,7 @@ package project.finaltoyproject.domain.user.dto;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import project.finaltoyproject.domain.order.dto.OrderResponseDto;
 import project.finaltoyproject.domain.posts.dto.PostsResponseDto;
 import project.finaltoyproject.domain.user.User;
 
@@ -20,6 +21,8 @@ public class ProfileResponseDto {
 
     private String email;
 
+    private List<OrderResponseDto> myOrders = new ArrayList<>();
+
     private List<PostsResponseDto> myPosts = new ArrayList<>();
 
     public ProfileResponseDto(User user)
@@ -33,5 +36,12 @@ public class ProfileResponseDto {
                         p.getDescription(),
                         p.getUser().getId()))
                 .collect(Collectors.toList());
+        this.myOrders = user.getOrderList()
+                .stream().map(o->new OrderResponseDto(
+                        o.getOrderState(),
+                        o.getTotalOrderPrice(),
+                        o.getUser().getUsername(),
+                        o.getOrderItems().stream().findFirst().orElse(null).getItem().getItemName()
+                )).collect(Collectors.toList());
     }
 }
