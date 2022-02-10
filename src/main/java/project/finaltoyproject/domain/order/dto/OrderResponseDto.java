@@ -13,11 +13,13 @@ public class OrderResponseDto {
     private Integer totalOrderPrice;
     private String username;
     private String itemName;
+    private int remainQuantity;
 
-    public OrderResponseDto(OrderState orderState, Integer totalOrderPrice, String username, String itemName) {
+    public OrderResponseDto(OrderState orderState, Integer totalOrderPrice, String username, String itemName, int remainQuantity) {
         this.orderState = orderState;
         this.totalOrderPrice = totalOrderPrice;
         this.username = username;
         this.itemName = itemName;
+        this.remainQuantity = remainQuantity;
     }
 }

@@ -48,6 +48,13 @@ public class Order extends BaseEntity {
         this.totalOrderQuantity += orderQuantity;
     }
 
+    public void cancelOrder()
+    {
+       this.orderState = OrderState.CANCEL;
+       this.orderItems.stream().forEach(o-> o.getItem().addQuantity(totalOrderQuantity));
+    }
+
+
     public Order(OrderState orderState)
     {
         this.orderState = orderState;

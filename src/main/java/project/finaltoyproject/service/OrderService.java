@@ -35,6 +35,15 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    @Transactional
+    public void cancelOrder(Long orderId) throws ClientInvalidInputException
+    {
+        Order findOrder = orderRepository.findById(orderId)
+                .orElseThrow(() -> new ClientInvalidInputException("잘못된 id 값입니다."));
+        findOrder.cancelOrder();
+    }
+
+
     public Page<Order> findAllOrders(Pageable pageable, OrderSearch orderSearch)
     {
        return orderRepository.searchPage(pageable,orderSearch);

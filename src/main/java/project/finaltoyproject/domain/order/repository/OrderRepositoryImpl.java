@@ -3,6 +3,7 @@ package project.finaltoyproject.domain.order.repository;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -49,6 +50,7 @@ public class OrderRepositoryImpl implements CustomOrderRepository{
     }
 
     private BooleanExpression orderStateEq(OrderState orderState) {
+        System.out.println("============" + orderState);
         return orderState == null ? null : order.orderState.eq(orderState);
     }
 

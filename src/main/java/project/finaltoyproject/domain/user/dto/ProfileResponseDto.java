@@ -21,9 +21,11 @@ public class ProfileResponseDto {
 
     private String email;
 
+
     private List<OrderResponseDto> myOrders = new ArrayList<>();
 
     private List<PostsResponseDto> myPosts = new ArrayList<>();
+
 
     public ProfileResponseDto(User user)
     {
@@ -41,7 +43,9 @@ public class ProfileResponseDto {
                         o.getOrderState(),
                         o.getTotalOrderPrice(),
                         o.getUser().getUsername(),
-                        o.getOrderItems().stream().findFirst().orElse(null).getItem().getItemName()
+                        o.getOrderItems().stream().findFirst().orElse(null).getItem().getItemName(),
+                        o.getOrderItems().stream().findFirst().orElse(null).getItem().getQuantity()
+
                 )).collect(Collectors.toList());
     }
 }

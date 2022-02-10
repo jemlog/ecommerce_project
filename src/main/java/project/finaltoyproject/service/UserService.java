@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import project.finaltoyproject.domain.user.User;
 import project.finaltoyproject.domain.user.repository.UserRepository;
 import project.finaltoyproject.util.exeption.DuplicatedEmailException;
-import project.finaltoyproject.util.exeption.UserNotExistException;
+
 
 import java.util.Optional;
 
