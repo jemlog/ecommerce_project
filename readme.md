@@ -17,7 +17,6 @@
 - Github actions
 - Nginx
 - Swagger API 
-- Vue.js
 
 ### 현재까지 구현 사항 
 
