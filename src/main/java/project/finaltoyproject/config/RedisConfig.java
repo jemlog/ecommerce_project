@@ -21,9 +21,9 @@ public class RedisConfig {
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>(); // String의 key, Object형의 value
+        redisTemplate.setKeySerializer(new StringRedisSerializer()); // key는 stringRedisSerializer로 직렬화
+        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer()); // value는 jackson2 -> object이기때문
         redisTemplate.setConnectionFactory(connectionFactory);
         return redisTemplate;
     }
@@ -31,8 +31,9 @@ public class RedisConfig {
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
-        configuration.setHostName(host);
-        configuration.setPort(port);
-        return new LettuceConnectionFactory(configuration);
+        configuration.setHostName(host); // application.yml에 설정한 host정보
+        configuration.setPort(port); // application.yml에 설정한 port 정보
+        return new LettuceConnectionFactory(configuration); // redis는 Lettuce를 사용한다. connectionFactory 생성을 위해
+                                                            // configuration 정보 추가 Lettuce는 redis 클라이언트 jedis보다 훨씬 좋다.
     }
 }

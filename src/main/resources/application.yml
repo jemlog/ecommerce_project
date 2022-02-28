@@ -4,9 +4,8 @@ spring:
     port: 6379
   session:
     redis:
-      flush-mode: on_save
-      namespace: spring:session
-    timeout: 600
+      flush-mode: on_save # 호출될때만 redis에 기록, immediate는 즉시 기록
+      namespace: spring:session # timeout springbootapplication에 붙임
     store-type: redis
 #  cache:
 #    type: redis

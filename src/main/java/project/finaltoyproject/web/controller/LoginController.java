@@ -24,6 +24,7 @@ public class LoginController {
     private final UserService userService;
 
 
+    //TODO : bindingResult를 잘 이용해서 오류 메세지를 내보내자
     @PostMapping("/signup")
     public Long signup(@RequestBody UserRequestDto userRequestDto, BindingResult bindingResult) throws Exception {
 
