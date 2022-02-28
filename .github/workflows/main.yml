@@ -28,13 +28,15 @@ jobs:
         run: chmod +x gradlew
         shell: bash
         
-      - name: Setup MySQL 
-        uses: samin/mysql-action@v1 
-        with: 
-          character set server: 'utf8' 
+      - name: Setup MySQL
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          host port: 8080
+          container port: 3306
+          mysql version: '5.7'
           mysql database: toy_schema
-          mysql user: root
-          mysql password: 4321
+          mysql user: 'root'
+          mysql password: '4321'
 
 
       - name: Build with Gradle
