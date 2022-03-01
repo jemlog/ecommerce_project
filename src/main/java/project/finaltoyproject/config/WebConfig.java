@@ -26,7 +26,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(loginInterceptor)
                 .order(1)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/auth/login","/auth/signup"); // 개발중이므로 모든 패턴 일단 허용
+                .excludePathPatterns("/auth/login","/auth/signup","/auth/health"); // 개발중이므로 모든 패턴 일단 허용
     }
 
     @Override
