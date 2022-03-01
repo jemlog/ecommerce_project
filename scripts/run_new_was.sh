@@ -18,7 +18,6 @@ if [ ! -z ${TARGET_PID} ]; then
    sudo kill ${TARGET_PID}
 fi
 
-echo "hi"
 
 nohup java -jar -Dserver.port=${TARGET_PORT} -Dspring.profiles.active=real -Dspring.config.location=classpath:application-real.yml,/home/ec2-user/application-real-db.yml /home/ec2-user/playground/finalproject/build/libs/* > /home/ec2-user/nohup.out 2>&1 &
 
