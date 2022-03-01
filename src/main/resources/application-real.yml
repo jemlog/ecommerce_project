@@ -1,7 +1,6 @@
 spring:
   profiles:
     include: real-db
-    active: real
   redis:
     host: localhost
     port: 6379
