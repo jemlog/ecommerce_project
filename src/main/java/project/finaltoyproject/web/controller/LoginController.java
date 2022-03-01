@@ -62,7 +62,7 @@ public class LoginController {
     @GetMapping("/health")
     public String healthCheck()
     {
-        return "login";
+        return "무중단 배포 성공";
     }
 
     @GetMapping("/profile")
