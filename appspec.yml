@@ -20,5 +20,5 @@ hooks:
       timeout: 180
       runas: ec2-user
     - location: scripts/switch.sh
-      timeout: 180
+      timeout: 250
       runas: ec2-user
