@@ -4,7 +4,8 @@ name: finalproject
 
 
 on:
-  workflow_dispatch:
+  push:
+    branches : [ master ]
 
 env: 
   S3_BUCKET_NAME: finalproject-jm
