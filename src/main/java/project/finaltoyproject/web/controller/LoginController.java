@@ -62,7 +62,7 @@ public class LoginController {
     @GetMapping("/health")
     public String healthCheck()
     {
-        return "health check ok";
+        return "health check ok2";
     }
 
     @GetMapping("/profile")
