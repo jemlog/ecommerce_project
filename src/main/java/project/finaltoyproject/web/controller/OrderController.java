@@ -47,7 +47,7 @@ public class OrderController {
                         );
     }
 
-    @GetMapping("/{id}/cancel")
+    @DeleteMapping("/{id}/cancel")
     public String cancelOrder(@PathVariable("id") Long id) throws ClientInvalidInputException
     {
         // TODO : orderState를 cancel로 만들어주자

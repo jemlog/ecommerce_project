@@ -58,6 +58,8 @@ public class User extends BaseEntity implements Serializable {
     @OneToOne(mappedBy = "user",fetch = FetchType.LAZY)
     private Point point;
 
+    private int totalOrderPriceForCheckingGrade;
+
     public User(UserRequestDto userRequestDto)
     {
         this.username = userRequestDto.getUsername();
@@ -65,6 +67,47 @@ public class User extends BaseEntity implements Serializable {
         this.email = userRequestDto.getEmail();
         this.password = userRequestDto.getPassword();
         this.grade = Grade.BRONZE; // 처음 가입한 회원은 무조건 BRONZE 등급부터 시작
+        this.totalOrderPriceForCheckingGrade = 0;
+    }
+
+    public void addTotalOrderPriceForGrade(int price)
+    {
+        this.totalOrderPriceForCheckingGrade += price;
+        checkGrade();
+    }
+
+    public void minusTotalOrderPriceForGrade(int price)
+    {
+        this.totalOrderPriceForCheckingGrade -= price;
+        checkGrade();
+    }
+
+    public void checkGrade()
+    {
+        if (totalOrderPriceForCheckingGrade < 300000)
+        {
+            grade = Grade.BRONZE;
+        }
+        else if(totalOrderPriceForCheckingGrade >= 300000 && totalOrderPriceForCheckingGrade < 600000)
+        {
+            grade = Grade.SILVER;
+        }
+        else if(totalOrderPriceForCheckingGrade >= 600000 && totalOrderPriceForCheckingGrade < 1000000)
+        {
+            grade = Grade.GOLD;
+        }
+        else
+        {
+            grade = Grade.VIP;
+        }
+
+
+    }
+
+    // 테스트용
+    public User(Grade grade)
+    {
+        this.grade = grade;
     }
 
 

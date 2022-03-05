@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import project.finaltoyproject.domain.order.dto.OrderResponseDto;
 import project.finaltoyproject.domain.posts.dto.PostsResponseDto;
+import project.finaltoyproject.domain.user.Grade;
 import project.finaltoyproject.domain.user.User;
 
 import java.util.ArrayList;
@@ -21,6 +22,9 @@ public class ProfileResponseDto {
 
     private String email;
 
+    private Grade grade;
+
+    private int totalPriceForGrade;
 
     private List<OrderResponseDto> myOrders = new ArrayList<>();
 
@@ -29,9 +33,11 @@ public class ProfileResponseDto {
 
     public ProfileResponseDto(User user)
     {
+        this.totalPriceForGrade = user.getTotalOrderPriceForCheckingGrade();
         this.username = user.getUsername();
         this.nickname = user.getNickname();
         this.email = user.getEmail();
+        this.grade = user.getGrade();
         this.myPosts = user.getPostsList()
                 .stream().map(p -> new PostsResponseDto(
                         p.getTitle(),

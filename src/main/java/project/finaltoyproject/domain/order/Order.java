@@ -44,7 +44,7 @@ public class Order extends BaseEntity {
 
     public void addAllOrderPriceAndOrderQuantity(int orderPrice, int orderQuantity)
     {
-        this.totalOrderPrice += orderPrice;
+        this.totalOrderPrice += orderQuantity * orderPrice;
         this.totalOrderQuantity += orderQuantity;
     }
 
@@ -52,7 +52,14 @@ public class Order extends BaseEntity {
     {
        this.orderState = OrderState.CANCEL;
        this.orderItems.stream().forEach(o-> o.getItem().addQuantity(totalOrderQuantity));
+       this.getUser().minusTotalOrderPriceForGrade(totalOrderPrice);
     }
+
+    public void discountOrderPrice(int discountPrice)
+    {
+        this.totalOrderPrice -= discountPrice;
+    }
+
 
 
     public Order(OrderState orderState)
@@ -70,9 +77,18 @@ public class Order extends BaseEntity {
     {
         Order order = new Order(OrderState.SUCCESS); // orderState 넣어주는 법
 
+        /*
+        먼저 모든 아이템들의 수량을 다 더한뒤에 최종적으로 등급에 따라 가격 할인을 해줘야 한다.
+         */
         Arrays.stream(orderItems)  // 입력된 모든 orderItem들의 수량과 가격 합을 더해주는 연산
                 .forEach(orderItem -> order.addAllOrderPriceAndOrderQuantity(orderItem.getOrderPrice(),
                         orderItem.getOrderQuantity()));
+
+
+
+
+
+
         for (OrderItem orderItem : orderItems) {
             order.addOrderItem(orderItem);
         }

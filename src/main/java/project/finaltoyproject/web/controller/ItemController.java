@@ -4,7 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import project.finaltoyproject.domain.item.Item;
 import project.finaltoyproject.domain.item.dto.ItemRequestDto;
+import project.finaltoyproject.domain.item.dto.ItemResponseDto;
 import project.finaltoyproject.service.ItemService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,6 +24,15 @@ public class ItemController {
                 itemRequestDto.getQuantity(),
                 itemRequestDto.getPrice()));
         return saveItem.getId();
+    }
+
+    @GetMapping
+    public List<ItemResponseDto> findAllItems()
+    {
+        List<Item> allItems = itemService.findAllItems();
+        List<ItemResponseDto> result = allItems.stream().map(i -> new ItemResponseDto(i.getItemName(), i.getQuantity(), i.getPrice()))
+                .collect(Collectors.toList());
+        return result;
     }
 
 
