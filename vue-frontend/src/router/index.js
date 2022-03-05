@@ -6,16 +6,21 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    redirect: '/login',
+  }
+    ,
+  {
+    path: '/login',
+    component: () => import(/* webpackChunkName: "about" */ '../views/LoginPage.vue')
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/signup',
+    component: () => import(/* webpackChunkName: "about" */ '../views/SignupPage.vue')
+  }
+  ,
+  {
+    path: '*',
+    component: () => import(/* webpackChunkName: "about" */ '../views/NotFoundPage.vue')
   }
 ]
 
@@ -24,5 +29,19 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach(function (to,from,next){
+
+  if(to.matched.some(function (routeInfo){
+    return routeInfo.meta.authRequired;
+  })){
+    alert('login Please!');
+  }else
+  {
+    console.log("routing success : '" + to.path + "'");
+    next();
+  }
+
+});
 
 export default router

@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Login</router-link> |
-      <router-link to="/about">물품 목록</router-link>
+      <router-link to="/signup">물품 목록</router-link>
+<!--   원래 뜨는 애들   -->
     </div>
     <router-view/>
   </div>
