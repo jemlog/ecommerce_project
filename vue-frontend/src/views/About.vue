@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>i will test axios!</h1>
+    <h1>물품 목록 가져오기</h1>
     <v-btn outlined @click="button">Click</v-btn>
     <p>{{a}}</p>
   </div>

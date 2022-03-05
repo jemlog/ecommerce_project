@@ -39,7 +39,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@RequestBody LoginDto loginDto, HttpServletRequest request) throws UserNotExistException {
-
+        System.out.println(loginDto.getEmail());
         // login user 찾기
         User findUser = userService.findByEmail(loginDto.getEmail(),loginDto.getPassword());
         if(findUser == null)

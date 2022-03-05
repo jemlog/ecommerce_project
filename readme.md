@@ -6,6 +6,7 @@
 - Spring Boot
 - Gradle
 - Mysql
+- Vue.js  
 - Redis
 - Spring Data JPA 
 - QueryDSL
@@ -16,7 +17,7 @@
 - AWS CodeDeploy
 - Github actions
 - Nginx
-- Swagger API 
+- Swagger API
 
 ### 현재까지 구현 사항 
 
