@@ -3,7 +3,7 @@ module.exports = {
     indexPath: "../static/index.html",
 
     devServer: {
-        proxy: "http://3.39.10.90"
+        proxy: "http://localhost:8083"
     },
 
     chainWebpack: config => {
@@ -12,7 +12,4 @@ module.exports = {
         svgRule.use("vue-svg-loader").loader("vue-svg-loader");
     },
 
-    transpileDependencies: [
-      'vuetify'
-    ]
 };
