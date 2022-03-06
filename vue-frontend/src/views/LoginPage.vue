@@ -1,5 +1,6 @@
 <template>
   <div class="loginSector">
+    <p class="loginLetter">Login</p>
   <div class="loginForm">
 <!--  <RouterLink to="/signup">회원가입</RouterLink>-->
   <LoginForm></LoginForm>
@@ -20,8 +21,12 @@ export default {
 
 <style>
 .loginSector{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: auto;
-  padding: 45px;
+  padding: 20px 35px 20px 35px;
   background-color: #f1f3f5;
 }
 .loginForm {
@@ -34,5 +39,10 @@ export default {
 }
 .signup{
   margin-top: 10px;
+}
+.loginLetter{
+  text-align: center;
+  font-size: 2rem;
+  font-family: 'Heebo', sans-serif;
 }
 </style>
