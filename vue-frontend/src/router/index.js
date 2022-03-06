@@ -7,7 +7,7 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: '/login',
+      component: () => import('@/views/LoginPage.vue'),
     },
     {
       path: '/login',
