@@ -1,10 +1,10 @@
 <template>
-  <h1>not found page</h1>
+  <h1>main page</h1>
 </template>
 
 <script>
 export default {
-  name: "NotFoundPage.vue"
+  name: "MainPage"
 }
 </script>
 

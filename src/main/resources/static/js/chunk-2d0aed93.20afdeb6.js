@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0aed93"],{"0c8b":function(n,e,t){"use strict";t.r(e);var u=function(){var n=this,e=n.$createElement,t=n._self._c||e;return t("h1",[n._v("not found page")])},a=[],o={name:"NotFoundPage.vue"},c=o,l=t("2877"),r=Object(l["a"])(c,u,a,!1,null,null,null);e["default"]=r.exports}}]);
+//# sourceMappingURL=chunk-2d0aed93.20afdeb6.js.map

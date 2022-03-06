@@ -1,47 +1,41 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-
-Vue.use(VueRouter)
-
-const routes = [
-  {
-    path: '/',
-    redirect: '/login',
-  }
-    ,
-  {
-    path: '/login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/LoginPage.vue')
-  },
-  {
-    path: '/signup',
-    component: () => import(/* webpackChunkName: "about" */ '../views/SignupPage.vue')
-  }
-  ,
-  {
-    path: '*',
-    component: () => import(/* webpackChunkName: "about" */ '../views/NotFoundPage.vue')
-  }
-]
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import store from '@/store/index';
+Vue.use(VueRouter);
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
-
-router.beforeEach(function (to,from,next){
-
-  if(to.matched.some(function (routeInfo){
-    return routeInfo.meta.authRequired;
-  })){
-    alert('login Please!');
-  }else
-  {
-    console.log("routing success : '" + to.path + "'");
-    next();
-  }
-
+  routes: [
+    {
+      path: '/',
+      redirect: '/login',
+    },
+    {
+      path: '/login',
+      component: () => import('@/views/LoginPage.vue'),
+    },
+    {
+      path: '/signup',
+      component: () => import('@/views/SignupPage.vue'),
+    },
+    {
+      path: '/main',
+      component: () => import('@/views/MainPage.vue'),
+      meta: { auth: true },
+    },
+    {
+      path: '*',
+      component: () => import('@/views/NotFoundPage.vue'),
+    },
+  ],
 });
 
-export default router
+router.beforeEach((to, from, next) => {
+  if (to.meta.auth && !store.getters.isLogin) {
+    console.log('인증이 필요합니다');
+    next('/login');
+    return;
+  }
+  next();
+});
+
+export default router;

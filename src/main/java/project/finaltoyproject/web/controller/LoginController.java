@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import project.finaltoyproject.domain.user.dto.ProfileResponseDto;
+import project.finaltoyproject.domain.user.dto.TokenDto;
 import project.finaltoyproject.util.exeption.SessionRemoveException;
 import project.finaltoyproject.web.auth.SessionConst;
 import project.finaltoyproject.domain.user.User;
@@ -38,7 +39,7 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginDto loginDto, HttpServletRequest request) throws UserNotExistException {
+    public TokenDto login(@RequestBody LoginDto loginDto, HttpServletRequest request) throws UserNotExistException {
         System.out.println(loginDto.getEmail());
         // login user 찾기
         User findUser = userService.findByEmail(loginDto.getEmail(),loginDto.getPassword());
@@ -46,9 +47,12 @@ public class LoginController {
         {
             throw new UserNotExistException("존재하지 않는 회원입니다.");
         }
-        HttpSession session = request.getSession();
-        session.setAttribute(SessionConst.AUTH_NAME,findUser);
-        return "login success";
+     //   HttpSession session = request.getSession();
+       // session.setAttribute(SessionConst.AUTH_NAME,findUser);
+        TokenDto tokenDto = new TokenDto();
+        tokenDto.setToken("adfdaffdvdfgrgdvbgfgregvfdgrgrg");
+        tokenDto.setUsername("jemin");
+        return tokenDto;
     }
 
     @GetMapping("/logout")
