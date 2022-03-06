@@ -19,7 +19,7 @@
       <input id="password" type="password" v-model="password">
     </div>
     <div>
-      <v-btn color="success" type="submit">가입회원</v-btn>
+      <button type="submit">가입회원</button>
     </div>
   </form>
   </div>

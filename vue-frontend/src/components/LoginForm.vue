@@ -11,7 +11,7 @@
       <input id="password" type="password" v-model="password">
     </div>
     <div>
-      <v-btn color="success" type="submit">로그인하자</v-btn>
+      <button type="submit">로그인하자</button>
     </div>
   </form>
   </div>
