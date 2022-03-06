@@ -1,7 +1,7 @@
 <template><div>
   <template v-if="$store.getters.isLogin">
     <span>안녕하세요 {{ $store.state.username }}님</span>
-    <button v-on:click="logoutUser">로그아웃</button>
+    <v-btn color="warn" v-on:click="logoutUser">로그아웃</v-btn>
   </template>
 </div>
 </template>

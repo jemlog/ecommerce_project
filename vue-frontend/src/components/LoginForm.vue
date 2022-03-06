@@ -1,20 +1,44 @@
+<!--<template>-->
+<!--  <div>-->
+<!--  <h1>loginform</h1>-->
+<!--  <form v-on:submit="submitForm">-->
+<!--    <div>-->
+<!--      <label for="email">Email</label>-->
+<!--      <input id="email" type="text" v-model="email">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <label for="password">Password</label>-->
+<!--      <input id="password" type="password" v-model="password">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <v-btn color="success" type="submit">로그인</v-btn>-->
+<!--    </div>-->
+<!--  </form>-->
+<!--  </div>-->
+<!--</template>-->
 <template>
-  <div>
-  <h1>loginform</h1>
-  <form v-on:submit="submitForm">
-    <div>
-      <label for="email">Email</label>
-      <input id="email" type="text" v-model="email">
-    </div>
-    <div>
-      <label for="password">Password</label>
-      <input id="password" type="password" v-model="password">
-    </div>
-    <div>
-      <button type="submit">로그인</button>
-    </div>
-  </form>
-  </div>
+  <v-form v-on:submit="submitForm">
+
+    <v-text-field
+        v-model="email"
+        label="E-mail"
+        required
+    ></v-text-field>
+    <v-text-field
+        v-model="password"
+        label="Password"
+        required
+    ></v-text-field>
+
+    <v-btn
+        color="success"
+        class="mr-4"
+        type="submit"
+    >
+      Login
+    </v-btn>
+
+  </v-form>
 </template>
 <script>
 
@@ -46,4 +70,8 @@ export default {
   }
 }
 </script>
+
+<style>
+
+</style>
 
