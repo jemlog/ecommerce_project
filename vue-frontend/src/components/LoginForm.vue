@@ -11,7 +11,7 @@
       <input id="password" type="password" v-model="password">
     </div>
     <div>
-      <button type="submit">로그인하자</button>
+      <button type="submit">로그인</button>
     </div>
   </form>
   </div>

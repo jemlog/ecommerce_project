@@ -1,6 +1,6 @@
 <template>
   <div>
-  <RouterLink to="/signup">회원가입</RouterLink>
+<!--  <RouterLink to="/signup">회원가입</RouterLink>-->
   <LoginForm></LoginForm>
   </div>
 </template>

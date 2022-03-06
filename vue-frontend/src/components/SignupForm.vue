@@ -19,9 +19,10 @@
       <input id="password" type="password" v-model="password">
     </div>
     <div>
-      <button type="submit">가입회원</button>
+      <button type="submit">입력 완료</button>
     </div>
   </form>
+    <router-link to="/login"><button>로그인 화면으로 이동</button></router-link>
   </div>
 </template>
 

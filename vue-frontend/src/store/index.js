@@ -18,15 +18,20 @@ export default new Vuex.Store({
       }
     },
     mutations : {
-        setUsername(state,username)
-        {
+        setUsername(state, username) {
             state.username = username;
         },
-        setToken(state,token)
-        {
+        setToken(state, token) {
             state.token = token;
+        },
+        clearUsername(state) {
+            state.username = '';
+        },
+        clearToken(state) {
+            state.token = '';
         }
-    },
+    }
+    ,
     actions : {
         async LOGIN({commit},userData)
         {
