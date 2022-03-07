@@ -2,10 +2,7 @@ package project.finaltoyproject.domain.authority;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "authority")
@@ -17,6 +14,9 @@ import javax.persistence.Table;
 public class Authority {
 
     @Id
-    @Column(name = "authority_name")
+    @Column(name = "authority_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String authorityName;
 }

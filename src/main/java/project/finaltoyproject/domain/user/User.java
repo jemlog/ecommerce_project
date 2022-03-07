@@ -55,12 +55,12 @@ public class User extends BaseEntity {
     @Column(name = "activated")
     private boolean activated;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "user_authority",
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "authoritys_name", referencedColumnName = "authority_name")})
-    private Set<Authority> authorities = new HashSet<>();
+            inverseJoinColumns = {@JoinColumn(name = "authoritys_id", referencedColumnName = "authority_id")})
+    private Set<Authority> authorities;
 
 
 
