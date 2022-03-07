@@ -9,12 +9,10 @@ import project.finaltoyproject.domain.posts.Posts;
 import project.finaltoyproject.domain.posts.dto.PostsRequestDto;
 import project.finaltoyproject.domain.posts.dto.PostsResponseDto;
 import project.finaltoyproject.domain.user.User;
-import project.finaltoyproject.domain.user.dto.LoginDto;
 import project.finaltoyproject.service.PostsService;
 import project.finaltoyproject.service.UserService;
 import project.finaltoyproject.util.exeption.ClientInvalidInputException;
 import project.finaltoyproject.util.exeption.SessionRemoveException;
-import project.finaltoyproject.util.exeption.UserNotExistException;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,7 +31,7 @@ public class PostsController {
     }
 
     @PostMapping
-    public String savePosts(@Login User loginUser, @RequestBody PostsRequestDto postsRequestDto) throws SessionRemoveException {
+    public String savePosts(User loginUser, @RequestBody PostsRequestDto postsRequestDto) throws SessionRemoveException {
         User user = userService.findById(loginUser.getId());
         if(user == null)
         {

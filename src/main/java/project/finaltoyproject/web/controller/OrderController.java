@@ -10,11 +10,8 @@ import project.finaltoyproject.domain.order.dto.OrderRequestDto;
 import project.finaltoyproject.domain.order.dto.OrderResponseDto;
 import project.finaltoyproject.domain.order.dto.OrderSearch;
 import project.finaltoyproject.domain.user.User;
-import project.finaltoyproject.domain.user.dto.LoginDto;
 import project.finaltoyproject.service.OrderService;
 import project.finaltoyproject.util.exeption.ClientInvalidInputException;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -25,7 +22,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public Long createOrder(@Login User loginUser, @RequestBody OrderRequestDto orderRequestDto)
+    public Long createOrder(User loginUser, @RequestBody OrderRequestDto orderRequestDto)
     {
 
         return orderService.createOrder(loginUser.getId(),

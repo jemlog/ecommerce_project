@@ -14,12 +14,9 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class LoginDto {
 
-    @NotEmpty
-    private Long id;
 
-    @Email
     @NotEmpty // null값, 빈칸, 공백 모두 허용하지 않기 위해 NotBlank 설정
-    private String email;
+    private String username;
 
 
     @NotEmpty

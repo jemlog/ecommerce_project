@@ -1,13 +1,19 @@
 package project.finaltoyproject.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import project.finaltoyproject.domain.authority.Authority;
 import project.finaltoyproject.domain.user.User;
+import project.finaltoyproject.domain.user.dto.UserDto;
 import project.finaltoyproject.domain.user.repository.UserRepository;
+import project.finaltoyproject.util.SecurityUtil;
 import project.finaltoyproject.util.exeption.DuplicatedEmailException;
 
 
+import javax.validation.Valid;
+import java.util.Collections;
 import java.util.Optional;
 
 @Service
@@ -16,7 +22,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-
+    private final PasswordEncoder passwordEncoder;
     @Transactional
     public User save(User user)
     {
@@ -43,5 +49,51 @@ public class UserService {
     public User findById(Long id)
     {
         return userRepository.findById(id).orElse(null);
+    }
+
+
+    // ==============================================================
+
+
+
+
+
+    @Transactional
+    public User signup(UserDto userDto) {
+        if (userRepository.findOneWithAuthoritiesByUsername(userDto.getUsername()).orElse(null) != null) {
+            throw new RuntimeException("이미 가입되어 있는 유저입니다.");
+        }
+
+        /**
+         * 권한 정보를 만든다. 기본적으로 회원가입을 하면 ROLE_USER라는 권한을 부여한다.
+         */
+        Authority authority = Authority.builder()
+                .authorityName("ROLE_USER")
+                .build();
+        System.out.println(authority.toString());
+
+
+        // 유저 정보 + 권한 정보로 user 만듬
+        User user = User.builder()
+                .username(userDto.getUsername())
+                .password(passwordEncoder.encode(userDto.getPassword()))
+                .nickname(userDto.getNickname())
+                .authorities(Collections.singleton(authority)) // Set 객체 하나만 저장하기 위함이다. user는 권한 role_user만 가져야함
+                .activated(true)
+                .build();
+        System.out.println(user);
+        // 저장
+        System.out.println("저장!");
+        return userRepository.save(user);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<User> getUserWithAuthorities(String username) {
+        return userRepository.findOneWithAuthoritiesByUsername(username);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<User> getMyUserWithAuthorities() {
+        return SecurityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername);
     }
 }
