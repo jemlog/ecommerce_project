@@ -5,7 +5,7 @@ name: finalproject
 
 on:
   push:
-    branches: [ spring-security-version2 ]
+    branches: [ master ]
 
 env: 
   S3_BUCKET_NAME: finalproject-jm
