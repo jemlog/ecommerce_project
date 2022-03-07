@@ -1,8 +1,9 @@
 package project.finaltoyproject.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import project.finaltoyproject.domain.authority.Authority;
 import project.finaltoyproject.domain.order.Order;
-import project.finaltoyproject.domain.point.Point;
 import project.finaltoyproject.domain.posts.Posts;
 import project.finaltoyproject.domain.user.dto.UserRequestDto;
 import project.finaltoyproject.util.BaseEntity;
@@ -10,7 +11,9 @@ import project.finaltoyproject.util.BaseEntity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 // TODO: 엔티티의 필드에 default 값 넣는 방법 알아보기
 // TODO: @Builder 사용시 enum 있으면 생성안됨
@@ -22,41 +25,52 @@ import java.util.List;
 // TODO: Post와 연관관계 만들기
 
 @Entity
+@Table(name = "user")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends BaseEntity implements Serializable {
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
-
+    private Long Id;
     // 실제 이름
-    @Column(nullable = false)
     private String username;
 
-    @Column(length = 10)
     private String nickname;
 
     // 로그인용 email
-    @Column(nullable = false)
     private String email;
 
     // 로그인용 password
-    @Column(length = 255, nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Grade grade;
+
+    @JsonIgnore
+    @Column(name = "activated")
+    private boolean activated;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_authority",
+            joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "authoritys_name", referencedColumnName = "authority_name")})
+    private Set<Authority> authorities = new HashSet<>();
+
+
+
+
 
     @OneToMany(mappedBy = "user")
     private List<Posts> postsList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<Order> orderList = new ArrayList<>();
-
-    @OneToOne(mappedBy = "user",fetch = FetchType.LAZY)
-    private Point point;
 
     private int totalOrderPriceForCheckingGrade;
 

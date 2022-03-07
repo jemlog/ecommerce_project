@@ -1,33 +1,39 @@
 
 spring:
-  redis:
-    host: localhost
-    port: 6379
-  session:
-    redis:
-      flush-mode: on_save # 호출될때만 redis에 기록, immediate는 즉시 기록
-      namespace: spring:session # timeout springbootapplication에 붙임
-    store-type: redis
+#  redis:
+#    host: localhost
+#    port: 6379
+#  session:
+#    redis:
+#      flush-mode: on_save # 호출될때만 redis에 기록, immediate는 즉시 기록
+#      namespace: spring:session # timeout springbootapplication에 붙임
+#    store-type: redis
   #  cache:
   #    type: redis
   #    redis:
   #      cache-null-values: true
   #      time-to-live: 10000
   datasource:
+
     url: jdbc:mysql://localhost:3306/toyproject_schema?serverTimezone=UTC&characterEncoding=UTF-8
+
     username: root
     password: 4321
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
-        default_batch_fetch_size: 100
+    #    default_batch_fetch_size: 100
         # show_sql: true
         format_sql: true
         use_sql_comments: true
 
+jwt:
+  header: Authorization
+  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  token-validity-in-seconds: 86400
 logging.level:
   org.hibernate.SQL: debug
   org.hibernate.type: trace
