@@ -20,8 +20,8 @@
   <v-form v-on:submit="submitForm">
 
     <v-text-field
-        v-model="email"
-        label="E-mail"
+        v-model="username"
+        label="Username"
         required
     ></v-text-field>
     <v-text-field
@@ -48,7 +48,7 @@ export default {
   name: "LoginForm",
   data : function (){
     return {
-      email : '',
+      username : '',
       password : ''
     }
   },
@@ -56,7 +56,7 @@ export default {
     async submitForm(event){
       event.preventDefault();
       const userData = {
-        email : this.email,
+        username : this.username,
         password : this.password
       }
      // const {data} = await loginUser(userData);

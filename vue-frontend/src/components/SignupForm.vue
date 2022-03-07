@@ -38,11 +38,11 @@
         label="Nickname"
         required
     ></v-text-field>
-    <v-text-field
-        v-model="email"
-        label="E-mail"
-        required
-    ></v-text-field>
+<!--    <v-text-field-->
+<!--        v-model="email"-->
+<!--        label="E-mail"-->
+<!--        required-->
+<!--    ></v-text-field>-->
     <v-text-field
         v-model="password"
         label="Password"
@@ -71,7 +71,7 @@ export default {
       username : '',
       password : '',
       nickname : '',
-      email : '',
+      // email : '',
     }
   },
   methods : {
@@ -83,7 +83,7 @@ export default {
          username : this.username,
          password : this.password,
          nickname : this.nickname,
-         email : this.email
+      //   email : this.email
       }
       registerUser(userData);
       this.initForm();
@@ -93,7 +93,7 @@ export default {
       this.username = '';
       this.password = '';
       this.nickname = '';
-      this.email = '';
+   //   this.email = '';
     }
 
   }
