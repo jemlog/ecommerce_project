@@ -10,7 +10,7 @@
 - Redis
 - Spring Data JPA 
 - QueryDSL
-- Spring Security(Optional)
+- Spring Security(JWT)
 - AWS EC2
 - AWS S3
 - AWS RDS
@@ -23,9 +23,8 @@
 
 - 로그인 구현 
 - 게시글 페이징 쿼리 구현 
-- 세션 레디스 보관 
-- 로그인한 유저별로 게시글 저장 
-- 로그인한 유저 프로필 내 연관 게시글 및 유저 주문 목록 조회
+- spring security를 사용한 jwt 로그인 방식 사용
+- vue.js에 jwt 인증 로직 추가  
 - 조건에 따른 전체 주문 목록 페이징 조회 기능 추가 
 - 주문 취소 및 재고 수량 원복 기능 추가 
 - github actions와 codeDeploy 사용한 무중단 배포 

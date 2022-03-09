@@ -5,7 +5,7 @@
   <li>재고 수량 : {{itemprop.quantity}}</li>
   <li>상품 가격 : {{itemprop.price}}</li>
 </ul>
-  <v-btn color="success">주문</v-btn>
+  <v-btn color="success" v-on:click="orderList">주문</v-btn>
   <v-btn color="warning" v-on:click="deleteList">삭제</v-btn>
 </div>
 
@@ -19,6 +19,10 @@ export default {
     deleteList()
     {
       this.$emit('delete',this.itemprop.id)
+    },
+    orderList()
+    {
+      this.$router.push(`/order/${this.itemprop.id}`)
     }
   }
 }

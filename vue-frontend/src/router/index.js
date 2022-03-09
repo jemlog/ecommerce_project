@@ -10,6 +10,10 @@ const router = new VueRouter({
       redirect : '/login'
     },
     {
+      path : '/order/:id',
+      component : () => import('@/views/Order.vue')
+    },
+    {
       path: '/login',
       component: () => import('@/views/LoginPage.vue'),
     },
