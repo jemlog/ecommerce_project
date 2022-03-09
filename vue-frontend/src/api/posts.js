@@ -8,6 +8,9 @@ function createPosts(itemData) {
     return posts.post('/', itemData);
 }
 
+function deletePosts(itemId) {
+    return posts.delete(`/${itemId}`);
+}
 
 
-export { fetchPosts, createPosts };
+export { fetchPosts, createPosts , deletePosts};

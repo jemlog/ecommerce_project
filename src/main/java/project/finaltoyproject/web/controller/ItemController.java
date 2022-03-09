@@ -30,10 +30,19 @@ public class ItemController {
     public List<ItemResponseDto> findAllItems()
     {
         List<Item> allItems = itemService.findAllItems();
-        List<ItemResponseDto> result = allItems.stream().map(i -> new ItemResponseDto(i.getItemName(), i.getQuantity(), i.getPrice()))
+        List<ItemResponseDto> result = allItems.stream().map(i -> new ItemResponseDto(i.getId(),i.getItemName(), i.getQuantity(), i.getPrice()))
                 .collect(Collectors.toList());
         return result;
     }
+
+    @DeleteMapping("/{id}")
+    public String deleteItem(@PathVariable("id") Long id)
+    {
+        itemService.delete(id);
+        return "success";
+
+    }
+
 
 
 
