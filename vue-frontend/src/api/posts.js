@@ -4,8 +4,10 @@ function fetchPosts() {
     return posts.get('/');
 }
 
-function createPosts(postData) {
-    return posts.post('/', postData);
+function createPosts(itemData) {
+    return posts.post('/', itemData);
 }
+
+
 
 export { fetchPosts, createPosts };

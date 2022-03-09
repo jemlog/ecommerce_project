@@ -16,4 +16,4 @@ function createAxiosServiceWithAuth(url) {
 }
 
 export const axiosService = createAxiosService();
-export const posts = createAxiosServiceWithAuth('posts');
+export const posts = createAxiosServiceWithAuth('items');

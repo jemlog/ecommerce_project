@@ -14,6 +14,10 @@ const router = new VueRouter({
       component: () => import('@/views/LoginPage.vue'),
     },
     {
+      path: '/addItems',
+      component : () => import('@/views/AddItems')
+    },
+    {
       path: '/signup',
       component: () => import('@/views/SignupPage.vue'),
     },

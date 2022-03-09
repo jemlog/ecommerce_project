@@ -21,33 +21,33 @@
     </v-app-bar>
 
     <v-main>
-      <!--  -->
-      <router-view/>
+      <ItemList :key="componentKey"></ItemList>
+<!--      <router-view/>-->
     </v-main>
   </v-app>
 </template>
 
 <script>
-import {fetchPosts} from "@/api/posts";
 import AppHeader from "@/components/AppHeader";
+import ItemList from "@/components/ItemList";
 export default {
   name: "MainPage",
   data : function ()
   {
     return {
-      data : '',
-      drawer: null
+      componentKey: 0
     }
   },
-  components : {
-    AppHeader
-  },
-  methods : {
-   async getInfo(){
-      const {data} = await fetchPosts()
-      this.data = data;
-    }
+  mounted() {
+    this.componentKey +=1;
   }
+  ,
+  components : {
+    ItemList,
+    AppHeader
+
+  },
+
 
 
 }
