@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProfileResponseDto {
 
+
     private String username;
 
     private String nickname;
@@ -26,11 +27,6 @@ public class ProfileResponseDto {
 
     private int totalPriceForGrade;
 
-    private List<OrderResponseDto> myOrders = new ArrayList<>();
-
-    private List<PostsResponseDto> myPosts = new ArrayList<>();
-
-
     public ProfileResponseDto(User user)
     {
         this.totalPriceForGrade = user.getTotalOrderPriceForCheckingGrade();
@@ -38,20 +34,34 @@ public class ProfileResponseDto {
         this.nickname = user.getNickname();
         this.email = user.getEmail();
         this.grade = user.getGrade();
-        this.myPosts = user.getPostsList()
-                .stream().map(p -> new PostsResponseDto(
-                        p.getTitle(),
-                        p.getDescription(),
-                        p.getUser().getId()))
-                .collect(Collectors.toList());
-        this.myOrders = user.getOrderList()
-                .stream().map(o->new OrderResponseDto(
-                        o.getOrderState(),
-                        o.getTotalOrderPrice(),
-                        o.getUser().getUsername(),
-                        o.getOrderItems().stream().findFirst().orElse(null).getItem().getItemName(),
-                        o.getOrderItems().stream().findFirst().orElse(null).getItem().getQuantity()
-
-                )).collect(Collectors.toList());
     }
+
+//    private List<OrderResponseDto> myOrders = new ArrayList<>();
+//
+//    private List<PostsResponseDto> myPosts = new ArrayList<>();
+//
+//
+//    public ProfileResponseDto(User user)
+//    {
+//        this.totalPriceForGrade = user.getTotalOrderPriceForCheckingGrade();
+//        this.username = user.getUsername();
+//        this.nickname = user.getNickname();
+//        this.email = user.getEmail();
+//        this.grade = user.getGrade();
+//        this.myPosts = user.getPostsList()
+//                .stream().map(p -> new PostsResponseDto(
+//                        p.getTitle(),
+//                        p.getDescription(),
+//                        p.getUser().getId()))
+//                .collect(Collectors.toList());
+//        this.myOrders = user.getOrderList()
+//                .stream().map(o->new OrderResponseDto(
+//                        o.getOrderState(),
+//                        o.getTotalOrderPrice(),
+//                        o.getUser().getUsername(),
+//                        o.getOrderItems().stream().findFirst().orElse(null).getItem().getItemName(),
+//                        o.getOrderItems().stream().findFirst().orElse(null).getItem().getQuantity()
+//
+//                )).collect(Collectors.toList());
+//    }
 }

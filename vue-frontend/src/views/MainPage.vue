@@ -12,6 +12,7 @@
         app
     >
       <AppHeader></AppHeader>
+      <Profile v-bind:userInfo="this.$store.state.userId"></Profile>
     </v-navigation-drawer>
 
     <v-app-bar app>
@@ -23,6 +24,7 @@
     <v-main>
       <ItemList :key="componentKey"></ItemList>
 <!--      <router-view/>-->
+      <router-link to="/orderList"><v-btn color="success">주문목록</v-btn></router-link>
     </v-main>
   </v-app>
 </template>
@@ -30,6 +32,7 @@
 <script>
 import AppHeader from "@/components/AppHeader";
 import ItemList from "@/components/ItemList";
+import Profile from "@/components/Profile";
 export default {
   name: "MainPage",
   data : function ()
@@ -43,6 +46,7 @@ export default {
   }
   ,
   components : {
+    Profile,
     ItemList,
     AppHeader
 

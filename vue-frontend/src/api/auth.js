@@ -1,4 +1,4 @@
-import { axiosService } from './index';
+import {axiosService, profile} from './index';
 
 function registerUser(userData) {
     return axiosService.post('api/signup', userData);
@@ -6,8 +6,15 @@ function registerUser(userData) {
 
 
 
+
 function loginUser(userData) {
     return axiosService.post('api/authenticate', userData);
 }
 
-export { registerUser, loginUser };
+function getProfile(userId)
+{
+    return profile.get(`/${userId}`);
+}
+
+
+export { registerUser, loginUser,getProfile };

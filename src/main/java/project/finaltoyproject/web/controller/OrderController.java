@@ -39,19 +39,21 @@ public class OrderController {
     {
 
         Page<Order> allOrders = orderService.findAllOrders(pageable, orderSearch);
-        System.out.println(allOrders.getContent().get(0).getOrderItems().get(0).getItem().getItemName());
+        System.out.println(allOrders);
+     //   System.out.println(allOrders.getContent().get(0).getOrderItems().get(0).getItem().getItemName());
         return allOrders.map(p ->
-                new OrderResponseDto(p.getOrderState(), p.getTotalOrderPrice(), p.getUser().getUsername(),
+                new OrderResponseDto(p.getId(),p.getOrderState(), p.getTotalOrderPrice(), p.getUser().getUsername(),
                         p.getOrderItems().stream().findFirst().orElse(null).getItem().getItemName(),
                         p.getOrderItems().stream().findFirst().orElse(null).getItem().getQuantity())
                         );
     }
 
-    @DeleteMapping("/{id}/cancel")
+    @DeleteMapping("/{id}")
     public String cancelOrder(@PathVariable("id") Long id) throws ClientInvalidInputException
     {
         // TODO : orderState를 cancel로 만들어주자
         // TODO : 개수 복원
+        System.out.println("cancel order 호출!!!");
         orderService.cancelOrder(id);
         return "cancel success";
     }

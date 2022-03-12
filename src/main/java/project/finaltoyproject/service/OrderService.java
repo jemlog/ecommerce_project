@@ -58,6 +58,7 @@ public class OrderService {
         Order findOrder = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ClientInvalidInputException("잘못된 id 값입니다."));
         findOrder.cancelOrder();
+        orderRepository.delete(findOrder);
 
     }
 

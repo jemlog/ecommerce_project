@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import project.finaltoyproject.domain.user.User;
+import project.finaltoyproject.domain.user.dto.ProfileResponseDto;
 import project.finaltoyproject.domain.user.dto.UserDto;
 import project.finaltoyproject.service.UserService;
 
@@ -31,6 +32,13 @@ public class UserController {
     public ResponseEntity<User> getMyUserInfo() {
         System.out.println("hello~~~~");
         return ResponseEntity.ok(userService.getMyUserWithAuthorities().get());
+    }
+
+    @GetMapping("/user/profile/{id}")
+    public ProfileResponseDto getProfile(@PathVariable("id") Long userId)
+    {
+        User findUser = userService.findById(userId);
+        return new ProfileResponseDto(findUser);
     }
 
     @GetMapping("/user/{username}")

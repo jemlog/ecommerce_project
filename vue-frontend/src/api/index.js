@@ -18,3 +18,4 @@ function createAxiosServiceWithAuth(url) {
 export const axiosService = createAxiosService();
 export const posts = createAxiosServiceWithAuth('items');
 export const orders = createAxiosServiceWithAuth('orders');
+export const profile = createAxiosServiceWithAuth('api/user/profile');
