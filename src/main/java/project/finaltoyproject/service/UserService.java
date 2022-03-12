@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.finaltoyproject.domain.authority.Authority;
+import project.finaltoyproject.domain.user.Grade;
 import project.finaltoyproject.domain.user.User;
 import project.finaltoyproject.domain.user.dto.UserDto;
 import project.finaltoyproject.domain.user.repository.UserRepository;
@@ -51,6 +52,16 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    public User findUserByUsername(String username,String password)
+    {
+        User user = userRepository.findUserByUsername(username)
+                .get(0);
+        //        .stream()
+          //      .filter(u -> u.getPassword().equals(password))
+            //    .findFirst().orElseThrow(() -> new IllegalStateException("해당되는 유저가 없다."));
+        return user;
+    }
+
 
     // ==============================================================
 
@@ -78,6 +89,8 @@ public class UserService {
                 .username(userDto.getUsername())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .nickname(userDto.getNickname())
+                .grade(Grade.BRONZE)
+                .totalOrderPriceForCheckingGrade(0)
                 .authorities(Collections.singleton(authority)) // Set 객체 하나만 저장하기 위함이다. user는 권한 role_user만 가져야함
                 .activated(true)
                 .build();

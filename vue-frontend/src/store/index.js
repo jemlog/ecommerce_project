@@ -1,6 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {getAuthFromCookie, getUserFromCookie, saveAuthToCookie, saveUserToCookie} from "@/utils/cookie";
+import {
+    getAuthFromCookie,
+    getUserFromCookie,
+    getUserIdFromCookie,
+    saveAuthToCookie,
+    saveUserToCookie
+} from "@/utils/cookie";
 import {loginUser} from "@/api/auth";
 import {fetchPosts} from "@/api/posts";
 
@@ -10,6 +16,7 @@ Vue.use(Vuex); // vue의 플러그인 가능
 export default new Vuex.Store({
     state : {
         username : getUserFromCookie() || '',
+        userId : getUserIdFromCookie() || '',
         token : getAuthFromCookie() || '',
         itemData : []
     },
@@ -23,6 +30,10 @@ export default new Vuex.Store({
         setUsername(state, username) {
             state.username = username;
         },
+        setUserId(state,userId)
+        {
+            state.userId = userId;
+        },
         setToken(state, token) {
             state.token = token;
         },
@@ -32,10 +43,15 @@ export default new Vuex.Store({
         clearToken(state) {
             state.token = '';
         },
-        setItemData(state,data)
+        clearUserId(state)
         {
+            state.userId = '';
+        }
+        ,
+        setItemData(state, data) {
             state.itemData = data;
         }
+
     }
     ,
     actions : {
@@ -45,7 +61,7 @@ export default new Vuex.Store({
             commit('setToken',"Bearer " + data.token);
             commit('setUsername',data.username);
             saveAuthToCookie("Bearer "+ data.token);
-            saveUserToCookie(data.username);
+            saveUserToCookie(data.username,data.userId);
             return data;
         },
 

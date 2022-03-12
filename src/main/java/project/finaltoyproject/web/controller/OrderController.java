@@ -22,10 +22,13 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public Long createOrder(User loginUser, @RequestBody OrderRequestDto orderRequestDto)
+    public Long createOrder(@RequestBody OrderRequestDto orderRequestDto)
     {
-
-        return orderService.createOrder(loginUser.getId(),
+        System.out.println("orderService 호출??");
+        System.out.println(orderRequestDto.getOrderQuantity());
+        System.out.println(orderRequestDto.getUserId());
+        System.out.println(orderRequestDto.getItemId());
+        return orderService.createOrder(orderRequestDto.getUserId(),
                 orderRequestDto.getItemId(),
                 orderRequestDto.getOrderQuantity()).getId();
     }

@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 public class OrderRequestDto {
 
     private int orderQuantity;
-
+    private Long userId;
     private Long itemId;
 }

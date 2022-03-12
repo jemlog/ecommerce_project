@@ -11,7 +11,9 @@ const router = new VueRouter({
     },
     {
       path : '/order/:id',
-      component : () => import('@/views/Order.vue')
+      name : 'Order',
+      component : () => import('@/views/OrderPage.vue'),
+      props : true
     },
     {
       path: '/login',

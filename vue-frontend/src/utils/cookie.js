@@ -2,13 +2,22 @@ function saveAuthToCookie(value) {
     document.cookie = `auth=${value}`;
 }
 
-function saveUserToCookie(value) {
-    document.cookie = `user=${value}`;
+function saveUserToCookie(value1,value2) {
+    document.cookie = `userId=${value2}`;
+    document.cookie = `user=${value1}`;
+
 }
 
 function getAuthFromCookie() {
     return document.cookie.replace(
         /(?:(?:^|.*;\s*)auth\s*=\s*([^;]*).*$)|^.*$/,
+        '$1',
+    );
+}
+
+function getUserIdFromCookie() {
+    return document.cookie.replace(
+        /(?:(?:^|.*;\s*)userId\s*=\s*([^;]*).*$)|^.*$/,
         '$1',
     );
 }
@@ -30,4 +39,5 @@ export {
     getAuthFromCookie,
     getUserFromCookie,
     deleteCookie,
+    getUserIdFromCookie
 };

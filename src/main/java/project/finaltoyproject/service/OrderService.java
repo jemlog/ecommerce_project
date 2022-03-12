@@ -34,11 +34,14 @@ public class OrderService {
     4. 사용자 등급 필요(userId로 사용자 등급 찾아서 활용)
      */
     @Transactional
-    public Order createOrder(Long userId, Long itemId,int quantity)
+    public Order createOrder(Long userId,Long itemId,int quantity)
     {
         // 사용자 찾음
         User findUser = userService.findById(userId);
+        System.out.println(findUser.getUsername());
+        System.out.println(findUser.getGrade());
         Item findItem = itemService.findById(itemId);
+        System.out.println(findItem.getItemName());
         OrderItem orderItem = OrderItem.createOrderItem(quantity, findItem);
         Order order = Order.createOrder(findUser, orderItem);
         int totalOrderPrice = order.getTotalOrderPrice();

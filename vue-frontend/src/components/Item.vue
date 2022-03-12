@@ -22,7 +22,7 @@ export default {
     },
     orderList()
     {
-      this.$router.push(`/order/${this.itemprop.id}`)
+      this.$router.push({name :"Order",query :{itemId : this.itemprop.id}} )
     }
   }
 }
