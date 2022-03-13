@@ -1,23 +1,24 @@
-## 이커머스 도메인 구현 토이프로젝트 
+# 🎮 이커머스 도메인 구현 토이프로젝트 
 
-### Skill stack 
+### 프로젝트 기간 
+- 2022.02.20 ~ 2022.03.13
+
+
+### 🛠 Skill stack 
 
 - Java 11
-- Spring Boot
+- Spring Boot 2.6.3
 - Gradle
 - Mysql
 - Vue.js  
-- Redis
 - Spring Data JPA 
 - QueryDSL
-- Spring Security(JWT)
-- AWS EC2
-- AWS S3
-- AWS RDS
-- AWS CodeDeploy
+- Spring Security(JWT Login)
 - Github actions
-- Nginx
-- Swagger API
+
+
+### 📚 Application Structure
+![mystructure3](https://user-images.githubusercontent.com/82302520/158058559-969d63ed-6418-42b4-8c1c-b7e1b29cb233.png)
 
 ### 현재까지 구현 사항 
 
@@ -35,3 +36,4 @@
 📌 @Builder를 엔티티 클래스 레벨에 붙이면 에러 발생한다. 
 - @Builder 어노테이션을 클래스 레벨에 작성시 AutoIncrement되는 Id값 까지 builder에 포함이 되서 오류 발생한다. 생성자에 어노테이션 붙이기 
 - querydsl 동적쿼리 시 enum 값 처리하는 방법 공부 -> controller의 타입 컨버터 문제 먼저 해결 필요 
+
