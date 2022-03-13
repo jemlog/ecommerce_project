@@ -21,8 +21,6 @@ public class ItemController {
     private final S3Uploader s3Uploader;
     @PostMapping
     public Long createItem(@ModelAttribute ItemRequestDto itemRequestDto) throws IOException {
-        System.out.println("드가보자");
-        System.out.println("실행됐냐?" + itemRequestDto.getImgfile().getOriginalFilename());
         String path = s3Uploader.upload(itemRequestDto.getImgfile(),"static");
 
         Item saveItem = itemService.save(new Item(itemRequestDto.getItemName(),
