@@ -32,7 +32,7 @@ public class Order extends BaseEntity {
 
     private int totalOrderQuantity;
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order",cascade = CascadeType.PERSIST)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     public void addUser(User user)
