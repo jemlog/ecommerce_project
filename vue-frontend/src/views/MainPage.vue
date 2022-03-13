@@ -24,7 +24,11 @@
     <v-main>
       <ItemList :key="componentKey"></ItemList>
 <!--      <router-view/>-->
-      <router-link to="/orderList"><v-btn color="success">주문목록</v-btn></router-link>
+      <div class="btns">
+        <router-link to="/addItems"><v-btn color="success" class="plus_button">제품 추가</v-btn></router-link>
+        <router-link to="/orderList"><v-btn color="success">주문목록</v-btn></router-link>
+      </div>
+
     </v-main>
   </v-app>
 </template>
@@ -57,3 +61,14 @@ export default {
 }
 </script>
 
+<style>
+.btns{
+  display: flex;
+  margin: 15px;
+  justify-content: center;
+  align-items: center;
+}
+.plus_button{
+  margin-right: 10px;
+}
+</style>

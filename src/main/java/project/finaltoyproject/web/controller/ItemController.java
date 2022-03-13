@@ -6,7 +6,9 @@ import project.finaltoyproject.domain.item.Item;
 import project.finaltoyproject.domain.item.dto.ItemRequestDto;
 import project.finaltoyproject.domain.item.dto.ItemResponseDto;
 import project.finaltoyproject.service.ItemService;
+import project.finaltoyproject.service.S3Uploader;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,21 +18,26 @@ import java.util.stream.Collectors;
 public class ItemController {
 
     private final ItemService itemService;
-
+    private final S3Uploader s3Uploader;
     @PostMapping
-    public Long createItem(@RequestBody ItemRequestDto itemRequestDto)
-    {
+    public Long createItem(@ModelAttribute ItemRequestDto itemRequestDto) throws IOException {
+        System.out.println("드가보자");
+        System.out.println("실행됐냐?" + itemRequestDto.getImgfile().getOriginalFilename());
+        String path = s3Uploader.upload(itemRequestDto.getImgfile(),"static");
+
         Item saveItem = itemService.save(new Item(itemRequestDto.getItemName(),
                 itemRequestDto.getQuantity(),
-                itemRequestDto.getPrice()));
+                itemRequestDto.getPrice(),path));
         return saveItem.getId();
     }
+
+
 
     @GetMapping
     public List<ItemResponseDto> findAllItems()
     {
         List<Item> allItems = itemService.findAllItems();
-        List<ItemResponseDto> result = allItems.stream().map(i -> new ItemResponseDto(i.getId(),i.getItemName(), i.getQuantity(), i.getPrice()))
+        List<ItemResponseDto> result = allItems.stream().map(i -> new ItemResponseDto(i.getId(),i.getItemName(), i.getQuantity(), i.getPrice(),i.getS3ImagePath()))
                 .collect(Collectors.toList());
         return result;
     }

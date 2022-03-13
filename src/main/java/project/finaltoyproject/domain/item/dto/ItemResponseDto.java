@@ -17,4 +17,6 @@ public class ItemResponseDto {
     private int quantity;
 
     private int price;
+
+    private String imagepath;
 }

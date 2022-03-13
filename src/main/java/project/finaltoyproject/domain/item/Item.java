@@ -26,6 +26,8 @@ public class Item extends BaseEntity {
 
     private int price;
 
+    private String s3ImagePath;
+
     public void minusQuantity(int quantity)
     {
         this.quantity -= quantity;
@@ -42,11 +44,12 @@ public class Item extends BaseEntity {
 
 
     @Builder
-    public Item(String itemName,int quantity,int price)
+    public Item(String itemName,int quantity,int price,String s3ImagePath)
     {
         this.itemName = itemName;
         this.quantity = quantity;
         this.price = price;
+        this.s3ImagePath = s3ImagePath;
     }
 
 

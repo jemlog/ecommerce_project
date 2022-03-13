@@ -1,11 +1,11 @@
-import { posts } from './index';
+import {posts, postsWithMultiPart} from './index';
 
 function fetchPosts() {
     return posts.get('/');
 }
 
 function createPosts(itemData) {
-    return posts.post('/', itemData);
+    return postsWithMultiPart.post('/', itemData);
 }
 
 function deletePosts(itemId) {

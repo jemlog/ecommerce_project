@@ -17,6 +17,9 @@
         label="Price"
         required
     ></v-text-field>
+    <v-file-input v-model="imgfile"
+    label="imgfile">
+    </v-file-input>
     <v-btn
         color="success"
         class="mr-4"
@@ -41,23 +44,31 @@ export default {
     return {
       itemName : '',
       quantity : '',
-      price : ''
+      price : '',
+      imgfile : ''
     }
   },
   methods : {
     async submitForm(event){
       event.preventDefault();
-      const itemData = {
-        itemName : this.itemName,
-        quantity : this.quantity,
-        price : this.price
-      }
+      let formData = new FormData();
+      formData.append("itemName",this.itemName)
+      formData.append("quantity",this.quantity)
+      formData.append("price",this.price)
+      formData.append("imgfile",this.imgfile)
+      // const itemData = {
+      //   itemName : this.itemName,
+      //   quantity : this.quantity,
+      //   price : this.price,
+      //   imgFile : this.imgFile
+      // }
      // const {data} = await loginUser(userData);
      // this.$store.commit('setToken',data.token);
      // this.$store.commit('setUsername',data.user.username);
      // saveAuthToCookie(data.token);
      // saveUserToCookie(data.user.username);
-      createPosts(itemData)
+      console.log(formData.get("imgfile"))
+      createPosts(formData)
       this.initForm();
       //await this.$store.dispatch('GETDATA');
       this.$router.push("/main");
@@ -66,6 +77,7 @@ export default {
       this.itemName = '';
       this.quantity = '';
       this.price = '';
+      this.imgfile = null;
     }
   }
 }

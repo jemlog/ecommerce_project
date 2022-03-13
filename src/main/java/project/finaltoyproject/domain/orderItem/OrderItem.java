@@ -42,7 +42,6 @@ public class OrderItem extends BaseEntity {
     public static OrderItem createOrderItem(int orderQauntity, Item item)
     {
         OrderItem orderItem = new OrderItem(item.getPrice(),orderQauntity,item);
-        // TODO: item의 수량 줄이기
         item.minusQuantity(orderQauntity);
         return orderItem;
 

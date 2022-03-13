@@ -1,13 +1,19 @@
 <template>
-  <div>
-    <ul>
-      <li v-for="item in items" v-bind:key="item">
-        <Item v-bind:itemprop="item" v-on:delete="deleteItem"></Item>
-      </li>
-    </ul>
-    <router-link to="/addItems"><v-btn color="success">제품 추가</v-btn></router-link>
+<!--  <div>-->
+<!--    <ul>-->
+<!--      <li v-for="item in items" v-bind:key="item">-->
+<!--        <Item v-bind:itemprop="item" v-on:delete="deleteItem"></Item>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--    -->
+<!--  </div>-->
+  <div class="itemArea">
+        <ul class="itemUl">
+          <li v-for="item in items" v-bind:key="item">
+            <Item v-bind:itemprop="item" v-on:delete="deleteItem"></Item>
+          </li>
+        </ul>
   </div>
-
 </template>
 
 <script>
@@ -47,5 +53,8 @@ export default {
 </script>
 
 <style scoped>
-
+.itemUl
+{
+  list-style: none;
+}
 </style>

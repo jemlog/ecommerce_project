@@ -12,14 +12,14 @@ const router = new VueRouter({
     {
       path: '/orderList',
       component : () => import('@/views/OrderListPage.vue'),
-      meta: { auth: true },
+ //     meta: { auth: true },
     },
     {
       path : '/order/:id',
       name : 'Order',
       component : () => import('@/views/OrderPage.vue'),
       props : true,
-      meta: { auth: true },
+ //     meta: { auth: true },
     },
     {
       path: '/login',
@@ -36,7 +36,7 @@ const router = new VueRouter({
     {
       path: '/main',
       component: () => import('@/views/MainPage.vue'),
-      meta: { auth: true },
+  //    meta: { auth: true },
     },
     {
       path: '*',
