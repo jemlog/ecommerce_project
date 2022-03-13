@@ -24,6 +24,9 @@
 ### 📚 Application Structure
 ![mystructure3](https://user-images.githubusercontent.com/82302520/158058559-969d63ed-6418-42b4-8c1c-b7e1b29cb233.png)
 
+<br>
+### 💪🏻 Motivation
+
 ### 현재까지 구현 사항 
 
 - 로그인 구현 
