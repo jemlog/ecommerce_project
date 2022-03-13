@@ -1,8 +1,11 @@
 # 🎮 이커머스 도메인 구현 토이프로젝트 
 
-### 프로젝트 기간 
+<br>
+
+### ⏰ 프로젝트 기간 
 - 2022.02.20 ~ 2022.03.13
 
+<br>
 
 ### 🛠 Skill stack 
 
@@ -16,6 +19,7 @@
 - Spring Security(JWT Login)
 - Github actions
 
+<br>
 
 ### 📚 Application Structure
 ![mystructure3](https://user-images.githubusercontent.com/82302520/158058559-969d63ed-6418-42b4-8c1c-b7e1b29cb233.png)
