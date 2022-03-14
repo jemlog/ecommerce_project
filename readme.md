@@ -34,7 +34,11 @@
 
 
 
+<br>
 
+###핵심원리 
+
+https://github.com/jemlog/ecommerce_project/blob/4104b6b6e7913db9508ba00e44a4cfd28f6201ae/src/main/java/project/finaltoyproject/policy/FixedDiscountByGradePolicy.java#L15
 
 
 
