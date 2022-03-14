@@ -9,9 +9,8 @@
 <br>
 
 ### 💪🏻 Motivation
-◾ 클라이언트, 백엔드, 서버 배포의 전 과정을 경험하고, 복합적인 도메인 설계를 구성하기 위해서 프로젝트를 기획하게 되었습니다.
-<br>
-◾ 여러 서비스의 기초가 되는 이커머스 도메인을 선택했고, 새로운 기술에 대한 경험을 위해 Spring security와 블루-그린 무중단 배포를 적용했습니다. 
+- 클라이언트, 백엔드, 서버 배포의 전 과정을 경험하고, 복합적인 도메인 설계를 구성하기 위해서 프로젝트를 기획하게 되었습니다.
+- 여러 서비스의 기초가 되는 이커머스 도메인을 선택했고, 새로운 기술에 대한 경험을 위해 Spring security와 블루-그린 무중단 배포를 적용했습니다. 
 
 <br>
 
@@ -36,11 +35,32 @@
 
 <br>
 
-###핵심원리 
+### 🛠 핵심기능 
 
-https://github.com/jemlog/ecommerce_project/blob/4104b6b6e7913db9508ba00e44a4cfd28f6201ae/src/main/java/project/finaltoyproject/policy/FixedDiscountByGradePolicy.java#L15
+<br>
+
+<details><summary>
+회원 등급에 따른 할인 비율 차등 적용
+</summary>
+</details>
+
+<details><summary>
+JWT를 사용한 로그인 기능 
+</summary>
+</details>
 
 
+<details><summary>
+CI/CD와 무중단 배포 
+</summary>
+
+</details>
+
+<details><summary>
+상품 주문 로직
+</summary>
+
+</details>
 
 
 
