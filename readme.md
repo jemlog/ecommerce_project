@@ -40,7 +40,7 @@
 <br>
 
 <details><summary>
-회원 등급에 따른 할인 비율 차등 적용
+회원 등급에 따른 할인 차등 적용 
 </summary>
 </details>
 
