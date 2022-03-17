@@ -15,12 +15,12 @@
 <br>
 
 ## 🛠 Skill Stack 
-- Language : Java 
-- Framework : Springboot, Spring Security
-- Database : AWS RDS (MYSQL)
-- ORM : JPA, QueryDSL
-- Deploy : AWS(EC2, S3)
-- CI/CD : Github actions & code Deploy
+- **Language** : Java 
+- **Framework** : Spring Boot, Spring Security
+- **Database** : AWS RDS (MYSQL)
+- **ORM** : JPA, QueryDSL
+- **Deploy** : AWS(EC2, S3)
+- **CI/CD** : Github actions & code Deploy
 
 <br>
 
