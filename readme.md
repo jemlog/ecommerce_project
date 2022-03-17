@@ -24,39 +24,16 @@
 
 <br>
 
+## 💡 Main Feature
+- 상품 옵션과 결제수단 선택 후 최종적으로 주문되는 로직
+- 회원 등급에 따른 할인 비율 차등 적용   
+- JWT 로그인 / 로그아웃 기능 
+
+<br>
+
 ## 📚 Application Structure
 ![mystructure3](https://user-images.githubusercontent.com/82302520/158058559-969d63ed-6418-42b4-8c1c-b7e1b29cb233.png)
 
-
-
-<br>
-
-## 🛠 핵심기능 
-
-<br>
-
-<details><summary>
-회원 등급에 따른 할인 차등 적용 
-</summary>
-</details>
-
-<details><summary>
-JWT를 사용한 로그인 기능 
-</summary>
-</details>
-
-
-<details><summary>
-CI/CD와 무중단 배포 
-</summary>
-
-</details>
-
-<details><summary>
-상품 주문 로직
-</summary>
-
-</details>
 
 
 
