@@ -28,6 +28,10 @@ public class Item extends BaseEntity {
 
     private String s3ImagePath;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "item_id")
+    private List<OptionGroupSpecification> optGroupSpecs = new ArrayList<>();
+
     public void minusQuantity(int quantity)
     {
         this.quantity -= quantity;
