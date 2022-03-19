@@ -44,3 +44,13 @@ logging.level:
   org.hibernate.type: trace
 server:
   port: 8083
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIAUDM5CADBGR4G5BRO
+      secret-key: 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
+    region:
+      static: ap-northeast-2
+    s3:
+      bucket: jmin-bucket
