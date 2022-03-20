@@ -24,7 +24,7 @@ public class SwaggerConfig {
                 .description("Springboot를 이용한 이커머스 웹 애플리케이션 API입니다")
                 .termsOfService("http://swagger.io/terms/")
                 .contact(new Contact().name("jemin"))
-                .license(new License().name("jemin"));
+                .license(new License().name("by jemin"));
 
         SecurityScheme securityScheme = new SecurityScheme()
                 .type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
