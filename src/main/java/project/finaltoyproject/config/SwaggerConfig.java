@@ -21,7 +21,7 @@ public class SwaggerConfig {
     public OpenAPI openAPI(@Value("${springdoc.version}") String appVersion)
     {
         Info info = new Info().title("E-Commerce project API").version(appVersion)
-                .description("Springboot를 이용한 이커머스 웹 애플리케이션 API입니다")
+                .description("Spring Boot를 이용한 이커머스 웹 애플리케이션 API입니다")
                 .termsOfService("http://swagger.io/terms/")
                 .contact(new Contact().name("jemin"))
                 .license(new License().name("by jemin"));
