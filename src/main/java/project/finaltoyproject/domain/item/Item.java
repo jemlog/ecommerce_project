@@ -16,6 +16,8 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item extends BaseEntity {
 
+    // TODO : ITEM의 PRICE를 OPTION의 PRICE로 변경
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private Long id;
@@ -23,8 +25,6 @@ public class Item extends BaseEntity {
     private String itemName;
 
     private int quantity;
-
-    private int price;
 
     private String s3ImagePath;
 
@@ -48,13 +48,30 @@ public class Item extends BaseEntity {
 
 
     @Builder
-    public Item(String itemName,int quantity,int price,String s3ImagePath)
+    public Item(String itemName,int quantity, String s3ImagePath, OptionGroupSpecification basic)
     {
         this.itemName = itemName;
         this.quantity = quantity;
-        this.price = price;
         this.s3ImagePath = s3ImagePath;
+        // 기본 가격은 basic한 옵션 고정으로 들어간다.
+        this.optGroupSpecs.add(basic);
+
     }
+
+    // 가격이 기본 속성으로 들어가있다.
+    // 그러므로 여러 optionSpec들 중 basic이라 되있는걸 찾아야 한다.
+    public OptionGroupSpecification getBasicOptionGroupSpec()
+    {
+        return optGroupSpecs.stream().filter(o->o.isBasic())
+                .findFirst().orElseThrow(IllegalStateException::new);
+    }
+
+    // basic은 어차피 하나 , get(0)으로 처음 option 가져온 후 price를 가져오자.
+    public int getBasicPrice()
+    {
+        return getBasicOptionGroupSpec().getOptionSpec().get(0).getPrice();
+    }
+
 
 
 
