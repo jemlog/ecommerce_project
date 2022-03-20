@@ -1,4 +1,4 @@
-package project.finaltoyproject.domain.order;
+package project.finaltoyproject.domain.orderItem;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -15,4 +15,12 @@ public class OrderOption {
 
     private int price;
 
+    public OrderOption(String name, int price)
+    {
+        this.name = name;
+        this.price = price;
+    }
+
 }
+
+

@@ -26,4 +26,20 @@ public class FinaltoyprojectApplication {
         SpringApplication.run(FinaltoyprojectApplication.class, args);
     }
 
+
+    /*
+    @Override
+    public void run(String... args) {
+        Cart cart = new Cart(1L, 1L,
+                        new CartLineItem(1L, "삼겹살 1인세트", 2,
+                            new CartOptionGroup("기본",
+                                    new CartOption("소(250g)", Money.wons(12000)))));
+
+        orderService.placeOrder(cart);
+
+        orderService.payOrder(1L);
+
+        orderService.deliverOrder(1L);
+    }
+ */
 }

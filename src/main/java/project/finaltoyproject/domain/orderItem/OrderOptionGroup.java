@@ -1,8 +1,7 @@
-package project.finaltoyproject.domain.order;
+package project.finaltoyproject.domain.orderItem;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,4 +20,11 @@ public class OrderOptionGroup {
     @ElementCollection
     @CollectionTable(name = "order_options",joinColumns = @JoinColumn(name = "order_option_group_id"))
     private List<OrderOption> orderOptions;
+
+    public OrderOptionGroup(String name, List<OrderOption> options)
+    {
+        this.name = name;
+        this.orderOptions = options;
+    }
+
 }
