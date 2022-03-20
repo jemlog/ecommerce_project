@@ -2,13 +2,16 @@ package project.finaltoyproject.domain.item;
 
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OptionGroupSpecification {
 
@@ -32,13 +35,22 @@ public class OptionGroupSpecification {
     private List<OptionSpecification> optionSpec = new ArrayList<>();
 
     @Builder
-    public OptionGroupSpecification(Long id,String name,boolean exclusive, boolean basic, List<OptionSpecification> options)
+    public OptionGroupSpecification(String name,boolean exclusive, boolean basic,List<OptionSpecification> options)
     {
-        this.id = id;
         this.name = name;
         this.exclusive = exclusive;
         this.basic = basic;
         this.optionSpec.addAll(options);
+    }
+
+    public static OptionGroupSpecification basic(String name, boolean exclusive, OptionSpecification... options)
+    {
+        return new OptionGroupSpecification(name,exclusive,true, Arrays.asList(options));
+    }
+
+    public static OptionGroupSpecification additive(String name, boolean exclusive, OptionSpecification... options)
+    {
+        return new OptionGroupSpecification(name,exclusive,false,Arrays.asList(options));
     }
 
 

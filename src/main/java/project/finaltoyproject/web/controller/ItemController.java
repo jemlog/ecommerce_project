@@ -23,9 +23,7 @@ public class ItemController {
     public Long createItem(@ModelAttribute ItemRequestDto itemRequestDto) throws IOException {
         String path = s3Uploader.upload(itemRequestDto.getImgfile(),"static");
 
-        Item saveItem = itemService.save(new Item(itemRequestDto.getItemName(),
-                itemRequestDto.getQuantity(),
-                itemRequestDto.getPrice(),path));
+        Item saveItem = itemService.saveItemAndOptions(itemRequestDto,path);
         return saveItem.getId();
     }
 
@@ -35,7 +33,8 @@ public class ItemController {
     public List<ItemResponseDto> findAllItems()
     {
         List<Item> allItems = itemService.findAllItems();
-        List<ItemResponseDto> result = allItems.stream().map(i -> new ItemResponseDto(i.getId(),i.getItemName(), i.getQuantity(), i.getPrice(),i.getS3ImagePath()))
+        List<ItemResponseDto> result = allItems.stream()
+                .map(i -> new ItemResponseDto(i.getId(),i.getItemName(), i.getQuantity(), i.getBasicPrice(),i.getS3ImagePath()))
                 .collect(Collectors.toList());
         return result;
     }

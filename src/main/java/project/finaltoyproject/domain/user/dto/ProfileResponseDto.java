@@ -8,6 +8,7 @@ import project.finaltoyproject.domain.posts.dto.PostsResponseDto;
 import project.finaltoyproject.domain.user.Grade;
 import project.finaltoyproject.domain.user.User;
 
+import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ public class ProfileResponseDto {
 
 
     private String username;
+
 
     private String nickname;
 

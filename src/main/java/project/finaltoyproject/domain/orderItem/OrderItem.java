@@ -40,7 +40,7 @@ public class OrderItem extends BaseEntity {
 
     public static OrderItem createOrderItem(int orderQauntity, Item item)
     {
-        OrderItem orderItem = new OrderItem(item.getPrice(),orderQauntity,item);
+        OrderItem orderItem = new OrderItem(item.getBasicPrice(),orderQauntity,item);
         item.minusQuantity(orderQauntity);
         return orderItem;
 

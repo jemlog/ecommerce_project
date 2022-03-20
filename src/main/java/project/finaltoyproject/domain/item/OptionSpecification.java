@@ -1,6 +1,8 @@
 package project.finaltoyproject.domain.item;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
@@ -12,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OptionSpecification {
 
     @Id
@@ -24,6 +27,11 @@ public class OptionSpecification {
     // 사은품 추가 시 가격
     private int price;
 
+    public OptionSpecification(String name, int price)
+    {
+        this.name = name;
+        this.price = price;
+    }
     // 코딩은 특히 무언가를 공부할때 동기가 꼭 있어야 한다.
     // 나는 지금 주문 도메인을 더 잘 짜고 싶다.
     // 거기에 enum으로 더 깔끔하게 작성하고 싶다.

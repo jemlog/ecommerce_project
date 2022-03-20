@@ -38,10 +38,9 @@ public class OrderService {
     {
         // 사용자 찾음
         User findUser = userService.findById(userId);
-        System.out.println(findUser.getUsername());
-        System.out.println(findUser.getGrade());
+
         Item findItem = itemService.findById(itemId);
-        System.out.println(findItem.getItemName());
+
         OrderItem orderItem = OrderItem.createOrderItem(quantity, findItem);
         Order order = Order.createOrder(findUser, orderItem);
         int totalOrderPrice = order.getTotalOrderPrice();
