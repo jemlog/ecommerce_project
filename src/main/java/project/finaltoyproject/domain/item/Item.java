@@ -1,5 +1,6 @@
 package project.finaltoyproject.domain.item;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Schema(description = "상품")
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -22,8 +24,10 @@ public class Item extends BaseEntity {
     @Column(name = "item_id")
     private Long id;
 
+    @Schema(description = "상품명",nullable = false,example = "머그컵")
     private String itemName;
 
+    @Schema(description = "상품수량",nullable = false,example = "10")
     private int quantity;
 
     private String s3ImagePath;

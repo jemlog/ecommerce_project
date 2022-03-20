@@ -1,5 +1,6 @@
 package project.finaltoyproject.web.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    @Operation(summary = "회원가입",description = "이름,닉네임,비밀번호로 회원가입을 진행합니다.")
     @PostMapping("/signup")
     public ResponseEntity<User> signup(
             @Valid @RequestBody UserDto userDto
