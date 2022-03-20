@@ -2,7 +2,7 @@
 node_modules
 /dist
 
-application.yml
+
 # local env files
 .env.local
 .env.*.local
