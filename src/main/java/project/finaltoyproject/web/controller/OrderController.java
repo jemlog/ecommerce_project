@@ -25,12 +25,15 @@ public class OrderController {
     public Long createOrder(@RequestBody OrderRequestDto orderRequestDto)
     {
         System.out.println("orderService 호출??");
-        System.out.println(orderRequestDto.getOrderQuantity());
-        System.out.println(orderRequestDto.getUserId());
-        System.out.println(orderRequestDto.getItemId());
-        return orderService.createOrder(orderRequestDto.getUserId(),
-                orderRequestDto.getItemId(),
-                orderRequestDto.getOrderQuantity()).getId();
+        System.out.println("orderQuantity : " + orderRequestDto.getOrderQuantity());
+        System.out.println("userId : " + orderRequestDto.getUserId());
+        System.out.println("itemId : " + orderRequestDto.getItemId());
+        System.out.println("orderGroupDto.name : " + orderRequestDto.getOrderGroupsDto().get(0).getName());
+        System.out.println("orderGroupDto.orderOptionDto.price : " + orderRequestDto.getOrderGroupsDto().get(0).getOrderOptionDto().get(0).getPrice());
+        return 1L;
+//        return orderService.createOrder(orderRequestDto.getUserId(),
+//                orderRequestDto.getItemId(),
+//                orderRequestDto.getOrderQuantity()).getId();
     }
 
     // TODO : MVC2의 타입 컨버터를 공부해야 해결할 수 있는 문제

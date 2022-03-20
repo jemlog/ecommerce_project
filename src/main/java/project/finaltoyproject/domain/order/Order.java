@@ -32,7 +32,7 @@ public class Order extends BaseEntity {
 
     private int totalOrderQuantity;
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     public void addUser(User user)
@@ -72,23 +72,24 @@ public class Order extends BaseEntity {
         orderItems.add(orderItem);
         orderItem.setOrder(this);
     }
+    public void place()
+    {
+        ordered();
+    }
 
+    public void ordered()
+    {
+        this.orderState = OrderState.ORDERED;
+    }
     public static Order createOrder(User user, OrderItem ...orderItems)
     {
-        Order order = new Order(OrderState.SUCCESS); // orderState 넣어주는 법
-
+        Order order = new Order();
         /*
         먼저 모든 아이템들의 수량을 다 더한뒤에 최종적으로 등급에 따라 가격 할인을 해줘야 한다.
          */
         Arrays.stream(orderItems)  // 입력된 모든 orderItem들의 수량과 가격 합을 더해주는 연산
                 .forEach(orderItem -> order.addAllOrderPriceAndOrderQuantity(orderItem.getOrderPrice(),
                         orderItem.getOrderQuantity()));
-
-
-
-
-
-
         for (OrderItem orderItem : orderItems) {
             order.addOrderItem(orderItem);
         }

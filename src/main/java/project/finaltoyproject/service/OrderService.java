@@ -38,11 +38,12 @@ public class OrderService {
     {
         // 사용자 찾음
         User findUser = userService.findById(userId);
-
+        // 상품 찾음
         Item findItem = itemService.findById(itemId);
-
+        // 주문 상품 만듬
         OrderItem orderItem = OrderItem.createOrderItem(quantity, findItem);
         Order order = Order.createOrder(findUser, orderItem);
+        order.place();
         int totalOrderPrice = order.getTotalOrderPrice();
         DiscountPolicy discountPolicy = new FixedDiscountByGradePolicy();
         int discountPrice = discountPolicy.discount(findUser, totalOrderPrice);

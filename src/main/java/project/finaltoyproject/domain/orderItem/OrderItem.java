@@ -8,6 +8,8 @@ import project.finaltoyproject.domain.order.Order;
 import project.finaltoyproject.util.BaseEntity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -17,6 +19,7 @@ public class OrderItem extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_item_id")
     private Long id;
 
     private int orderPrice;
@@ -26,6 +29,10 @@ public class OrderItem extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_item_id")
+    private List<OrderOptionGroup> optionGroups = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
