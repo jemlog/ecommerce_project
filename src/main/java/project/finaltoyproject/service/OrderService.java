@@ -55,8 +55,7 @@ public class OrderService {
 //    }
 
     @Transactional
-    public Order createOrder(OrderRequestDto orderRequestDto)
-    {
+    public Order createOrder(OrderRequestDto orderRequestDto) {
         // 사용자 찾음
         User findUser = userService.findById(orderRequestDto.getUserId());
         // 상품 찾음
@@ -67,28 +66,26 @@ public class OrderService {
         Order order = Order.createOrder(findUser, orderItem);
         // 검증 로직 (아직 생성 안함)
         order.place();
-//        int totalOrderPrice = order.getOrderItems()
-//        DiscountPolicy discountPolicy = new FixedDiscountByGradePolicy();
-//        int discountPrice = discountPolicy.discount(findUser, totalOrderPrice);
-//        order.discountOrderPrice(discountPrice);
-//        findUser.addTotalOrderPriceForGrade(order.getTotalOrderPrice());
+        // 하나의 order 안에 있는 옵션들의 가격 모두 합산
         Money totalOrderPrice = order.calculateTotalPrice();
+        // 등급별로 할인율을 차등 적용하는 로직
         DiscountPolicy discountPolicy = new FixedDiscountByGradePolicy();
         Money discountPrice = discountPolicy.discount(findUser, totalOrderPrice);
+        // order entity에 실제 할인 가격 적용하기
         order.setTotalMoney(discountPrice);
+        // 구매 금액별 실시간 등급 산정을 위한 로직
         findUser.addTotalOrderPriceForGrade(order.getTotalMoney());
         return orderRepository.save(order);
     }
 
     @Transactional
-    public void payOrder(Long orderId)
-    {
+    public void payOrder(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(IllegalStateException::new);
         // order.payed 처럼 계산하는 로직 추가
     }
+
     @Transactional
-    public void cancelOrder(Long orderId) throws ClientInvalidInputException
-    {
+    public void cancelOrder(Long orderId) throws ClientInvalidInputException {
         Order findOrder = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ClientInvalidInputException("잘못된 id 값입니다."));
         findOrder.cancelOrder();
@@ -96,23 +93,8 @@ public class OrderService {
 
     }
 
-
-    public Page<Order> findAllOrders(Pageable pageable, OrderSearch orderSearch)
-    {
-       return orderRepository.searchPage(pageable,orderSearch);
+    public Page<Order> findAllOrders(Pageable pageable, OrderSearch orderSearch) {
+        return orderRepository.searchPage(pageable, orderSearch);
     }
-
-//    @Transactional
-//    public void deleteOrder(Long orderId) throws ClientInvalidInputException {
-//
-//        // TODO : id값 잘못 들어왔을때 사용할 공통 예외를 만들자!
-//        Order findOrder = orderRepository.findById(orderId)
-//                .orElseThrow(
-//                        () -> new ClientInvalidInputException("사용자가 잘못된 값을 입력했습니다.")
-//                );
-//
-//        orderRepository.delete(findOrder);
-//
-//    }
 
 }
