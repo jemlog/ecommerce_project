@@ -42,11 +42,11 @@ public class OrderRepositoryImpl implements CustomOrderRepository{
     }
 
     private BooleanExpression totalPriceLoe(Integer totalPriceLoe) {
-        return totalPriceLoe == null ? null : order.totalOrderPrice.loe(totalPriceLoe);
+        return totalPriceLoe == null ? null : order.totalMoney.loe(totalPriceLoe);
     }
 
     private BooleanExpression totalPriceGoe(Integer totalPriceGoe) {
-        return totalPriceGoe == null ? null : order.totalOrderPrice.goe(totalPriceGoe);
+        return totalPriceGoe == null ? null : order.totalMoney.goe(totalPriceGoe);
     }
 
     private BooleanExpression orderStateEq(OrderState orderState) {
