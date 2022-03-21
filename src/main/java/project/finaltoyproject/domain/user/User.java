@@ -10,6 +10,7 @@ import project.finaltoyproject.util.BaseEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -72,7 +73,7 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user")
     private List<Order> orderList = new ArrayList<>();
 
-    private int totalOrderPriceForCheckingGrade;
+    private double totalOrderPriceForCheckingGrade;
 
     public User(UserRequestDto userRequestDto)
     {
@@ -81,16 +82,16 @@ public class User extends BaseEntity {
         this.email = userRequestDto.getEmail();
         this.password = userRequestDto.getPassword();
         this.grade = Grade.BRONZE; // 처음 가입한 회원은 무조건 BRONZE 등급부터 시작
-        this.totalOrderPriceForCheckingGrade = 0;
+        this.totalOrderPriceForCheckingGrade = 0.0;
     }
 
-    public void addTotalOrderPriceForGrade(int price)
+    public void addTotalOrderPriceForGrade(double price)
     {
         this.totalOrderPriceForCheckingGrade += price;
         checkGrade();
     }
 
-    public void minusTotalOrderPriceForGrade(int price)
+    public void minusTotalOrderPriceForGrade(double price)
     {
         this.totalOrderPriceForCheckingGrade -= price;
         checkGrade();

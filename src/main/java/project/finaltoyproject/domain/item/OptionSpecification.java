@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import project.finaltoyproject.domain.money.Money;
 
 import javax.persistence.*;
 import java.util.ArrayList;

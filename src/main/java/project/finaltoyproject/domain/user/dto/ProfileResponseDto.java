@@ -27,7 +27,7 @@ public class ProfileResponseDto {
 
     private Grade grade;
 
-    private int totalPriceForGrade;
+    private double totalPriceForGrade;
 
     public ProfileResponseDto(User user)
     {

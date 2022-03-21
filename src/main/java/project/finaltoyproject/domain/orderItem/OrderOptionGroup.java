@@ -1,12 +1,16 @@
 package project.finaltoyproject.domain.orderItem;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import project.finaltoyproject.domain.money.Money;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderOptionGroup {
 
@@ -25,6 +29,11 @@ public class OrderOptionGroup {
     {
         this.name = name;
         this.orderOptions = options;
+    }
+
+    public Money caculatePrice()
+    {
+        return Money.sum(orderOptions,OrderOption::getPrice);
     }
 
 }

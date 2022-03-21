@@ -30,7 +30,7 @@ public class OrderController {
         System.out.println("itemId : " + orderRequestDto.getItemId());
         System.out.println("orderGroupDto.name : " + orderRequestDto.getOrderGroupsDto().get(0).getName());
         System.out.println("orderGroupDto.orderOptionDto.price : " + orderRequestDto.getOrderGroupsDto().get(0).getOrderOptionDto().get(0).getPrice());
-        return 1L;
+        return orderService.createOrder(orderRequestDto).getId();
 //        return orderService.createOrder(orderRequestDto.getUserId(),
 //                orderRequestDto.getItemId(),
 //                orderRequestDto.getOrderQuantity()).getId();
@@ -45,7 +45,7 @@ public class OrderController {
         System.out.println(allOrders);
      //   System.out.println(allOrders.getContent().get(0).getOrderItems().get(0).getItem().getItemName());
         return allOrders.map(p ->
-                new OrderResponseDto(p.getId(),p.getOrderState(), p.getTotalOrderPrice(), p.getUser().getUsername(),
+                new OrderResponseDto(p.getId(),p.getOrderState(), p.getTotalMoney(), p.getUser().getUsername(),
                         p.getOrderItems().stream().findFirst().orElse(null).getItem().getItemName(),
                         p.getOrderItems().stream().findFirst().orElse(null).getItem().getQuantity())
                         );

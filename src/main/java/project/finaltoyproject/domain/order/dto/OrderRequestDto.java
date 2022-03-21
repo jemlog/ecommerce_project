@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import project.finaltoyproject.domain.orderItem.OrderOptionGroup;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 // 중첩 구조 받는 법
@@ -14,7 +15,7 @@ public class OrderRequestDto {
 
     private Long userId;
     private Long itemId;
-    private String name;
+    private String name; // item 이름
     private int orderQuantity;
     private List<OrderOptionGroupDto> orderGroupsDto;
 
@@ -31,7 +32,7 @@ public class OrderRequestDto {
     public static class OrderOptionDto
     {
         private String name;
-        private int price;
+        private double price;
     }
 
 

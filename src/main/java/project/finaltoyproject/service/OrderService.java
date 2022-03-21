@@ -6,7 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.finaltoyproject.domain.item.Item;
+import project.finaltoyproject.domain.money.Money;
 import project.finaltoyproject.domain.order.Order;
+import project.finaltoyproject.domain.order.dto.OrderRequestDto;
 import project.finaltoyproject.domain.order.dto.OrderSearch;
 import project.finaltoyproject.domain.order.repository.OrderRepository;
 import project.finaltoyproject.domain.orderItem.OrderItem;
@@ -33,25 +35,57 @@ public class OrderService {
     3. 몇개 살지 수량 필요함
     4. 사용자 등급 필요(userId로 사용자 등급 찾아서 활용)
      */
+//    @Transactional
+//    public Order createOrder(Long userId,Long itemId,int quantity)
+//    {
+//        // 사용자 찾음
+//        User findUser = userService.findById(userId);
+//        // 상품 찾음
+//        Item findItem = itemService.findById(itemId);
+//        // 주문 상품 만듬
+//        OrderItem orderItem = OrderItem.createOrderItem(quantity, findItem);
+//        Order order = Order.createOrder(findUser, orderItem);
+//        order.place();
+//        int totalOrderPrice = order.getTotalOrderPrice();
+//        DiscountPolicy discountPolicy = new FixedDiscountByGradePolicy();
+//        int discountPrice = discountPolicy.discount(findUser, totalOrderPrice);
+//        order.discountOrderPrice(discountPrice);
+//        findUser.addTotalOrderPriceForGrade(order.getTotalOrderPrice());
+//        return orderRepository.save(order);
+//    }
+
     @Transactional
-    public Order createOrder(Long userId,Long itemId,int quantity)
+    public Order createOrder(OrderRequestDto orderRequestDto)
     {
         // 사용자 찾음
-        User findUser = userService.findById(userId);
+        User findUser = userService.findById(orderRequestDto.getUserId());
         // 상품 찾음
-        Item findItem = itemService.findById(itemId);
+        Item findItem = itemService.findById(orderRequestDto.getItemId());
         // 주문 상품 만듬
-        OrderItem orderItem = OrderItem.createOrderItem(quantity, findItem);
+        OrderItem orderItem = OrderItem.createOrderItem(orderRequestDto, findItem);
+        // Order 생성
         Order order = Order.createOrder(findUser, orderItem);
+        // 검증 로직 (아직 생성 안함)
         order.place();
-        int totalOrderPrice = order.getTotalOrderPrice();
+//        int totalOrderPrice = order.getOrderItems()
+//        DiscountPolicy discountPolicy = new FixedDiscountByGradePolicy();
+//        int discountPrice = discountPolicy.discount(findUser, totalOrderPrice);
+//        order.discountOrderPrice(discountPrice);
+//        findUser.addTotalOrderPriceForGrade(order.getTotalOrderPrice());
+        Money totalOrderPrice = order.calculateTotalPrice();
         DiscountPolicy discountPolicy = new FixedDiscountByGradePolicy();
-        int discountPrice = discountPolicy.discount(findUser, totalOrderPrice);
-        order.discountOrderPrice(discountPrice);
-        findUser.addTotalOrderPriceForGrade(order.getTotalOrderPrice());
+        Money discountPrice = discountPolicy.discount(findUser, totalOrderPrice);
+        order.setTotalMoney(discountPrice);
+        findUser.addTotalOrderPriceForGrade(order.getTotalMoney());
         return orderRepository.save(order);
     }
 
+    @Transactional
+    public void payOrder(Long orderId)
+    {
+        Order order = orderRepository.findById(orderId).orElseThrow(IllegalStateException::new);
+        // order.payed 처럼 계산하는 로직 추가
+    }
     @Transactional
     public void cancelOrder(Long orderId) throws ClientInvalidInputException
     {

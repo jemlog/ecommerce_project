@@ -1,11 +1,13 @@
 package project.finaltoyproject.domain.order;
 
 import lombok.*;
+import project.finaltoyproject.domain.money.Money;
 import project.finaltoyproject.domain.orderItem.OrderItem;
 import project.finaltoyproject.domain.user.User;
 import project.finaltoyproject.util.BaseEntity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,13 +26,13 @@ public class Order extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderState orderState;
 
+    @Column(nullable = true)
+    private double totalMoney;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    private int totalOrderPrice;
-
-    private int totalOrderQuantity;
 
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
@@ -41,24 +43,22 @@ public class Order extends BaseEntity {
         this.user = user;
     }
 
-
-    public void addAllOrderPriceAndOrderQuantity(int orderPrice, int orderQuantity)
-    {
-        this.totalOrderPrice += orderQuantity * orderPrice;
-        this.totalOrderQuantity += orderQuantity;
-    }
+//
+//    public void addAllOrderPriceAndOrderQuantity(int orderPrice, int orderQuantity)
+//    {
+//        this.totalOrderPrice += orderQuantity * orderPrice;
+//        this.totalOrderQuantity += orderQuantity;
+//    }
 
     public void cancelOrder()
     {
        this.orderState = OrderState.CANCEL;
-       this.orderItems.stream().forEach(o-> o.getItem().addQuantity(totalOrderQuantity));
-       this.getUser().minusTotalOrderPriceForGrade(totalOrderPrice);
+       this.getUser().minusTotalOrderPriceForGrade(totalMoney);
+//       this.orderItems.stream().forEach(o-> o.getItem().addQuantity(totalOrderQuantity));
+//       this.getUser().minusTotalOrderPriceForGrade(totalOrderPrice);
     }
 
-    public void discountOrderPrice(int discountPrice)
-    {
-        this.totalOrderPrice -= discountPrice;
-    }
+
 
 
 
@@ -84,12 +84,7 @@ public class Order extends BaseEntity {
     public static Order createOrder(User user, OrderItem ...orderItems)
     {
         Order order = new Order();
-        /*
-        먼저 모든 아이템들의 수량을 다 더한뒤에 최종적으로 등급에 따라 가격 할인을 해줘야 한다.
-         */
-        Arrays.stream(orderItems)  // 입력된 모든 orderItem들의 수량과 가격 합을 더해주는 연산
-                .forEach(orderItem -> order.addAllOrderPriceAndOrderQuantity(orderItem.getOrderPrice(),
-                        orderItem.getOrderQuantity()));
+
         for (OrderItem orderItem : orderItems) {
             order.addOrderItem(orderItem);
         }
@@ -97,6 +92,17 @@ public class Order extends BaseEntity {
         return order;
     }
 
+    // 여기서 사용자 등급에 따른 할인 적용을 해줘야 한다.
+    public Money calculateTotalPrice() {
+        return Money.sum(orderItems, OrderItem::calculatePrice);
+    }
+
+    public void setTotalMoney(Money discountPrice)
+    {
+        Money finalMoney = calculateTotalPrice();
+        double amount = finalMoney.minus(discountPrice).doubleValue();
+        totalMoney = amount;
+    }
 
 
 }
