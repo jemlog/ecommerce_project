@@ -52,14 +52,13 @@ public class Item extends BaseEntity {
 
 
     @Builder
-    public Item(String itemName,int quantity, String s3ImagePath, OptionGroupSpecification basic)
+    public Item(String itemName,int quantity, String s3ImagePath, List<OptionGroupSpecification> optGroupSpecs)
     {
         this.itemName = itemName;
         this.quantity = quantity;
         this.s3ImagePath = s3ImagePath;
         // 기본 가격은 basic한 옵션 고정으로 들어간다.
-        this.optGroupSpecs.add(basic);
-
+        this.optGroupSpecs = optGroupSpecs;
     }
 
     // 가격이 기본 속성으로 들어가있다.

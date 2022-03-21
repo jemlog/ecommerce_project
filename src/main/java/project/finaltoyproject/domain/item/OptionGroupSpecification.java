@@ -32,7 +32,7 @@ public class OptionGroupSpecification {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "option_group_spec_id")
-    private List<OptionSpecification> optionSpec = new ArrayList<>();
+    private List<OptionSpecification> optionSpec;
 
     @Builder
     public OptionGroupSpecification(String name,boolean exclusive, boolean basic,List<OptionSpecification> options)
@@ -40,7 +40,7 @@ public class OptionGroupSpecification {
         this.name = name;
         this.exclusive = exclusive;
         this.basic = basic;
-        this.optionSpec.addAll(options);
+        this.optionSpec = options;
     }
 
     public static OptionGroupSpecification basic(String name, boolean exclusive, OptionSpecification... options)

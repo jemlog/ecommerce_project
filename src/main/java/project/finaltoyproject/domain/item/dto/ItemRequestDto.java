@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -16,10 +18,25 @@ public class ItemRequestDto {
 
     private String itemName;
     private int quantity;
-    private String optionGroupName;
-    private String optionName;
-    private int optionPrice;
-    private boolean exclusive;  // 배타 선택 경우
-    private boolean basic;  // 기본적으로 선택 되어져 있는 경우
+    private List<OptionGroupSpecDto> optionGroupDto;
+
+    @Data
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class OptionGroupSpecDto
+    {
+      private String name;
+      private boolean exclusive;
+      private boolean basic;
+      private List<OptionSpecDto> optionDto;
+    }
+
+    @Data
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class OptionSpecDto
+    {
+        private String name;
+        private int optionPrice;
+    }
+
     private MultipartFile imgfile;
 }
