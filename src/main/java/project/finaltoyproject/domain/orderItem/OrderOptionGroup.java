@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.finaltoyproject.domain.money.Money;
+import project.finaltoyproject.util.BaseEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class OrderOptionGroup {
+public class OrderOptionGroup extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

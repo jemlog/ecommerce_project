@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 @Embeddable
 @Getter
-public class OrderOption {
+public class OrderOption{
 
 
     @Column(name="NAME")

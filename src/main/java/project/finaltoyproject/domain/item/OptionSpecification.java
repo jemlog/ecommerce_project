@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import project.finaltoyproject.domain.money.Money;
+import project.finaltoyproject.util.BaseEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class OptionSpecification {
+public class OptionSpecification extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
