@@ -29,30 +29,6 @@ public class OrderService {
     private final UserService userService;
     private final ItemService itemService;
 
-    /*
-    1. userId 들어가야함
-    2. itemId 필요함
-    3. 몇개 살지 수량 필요함
-    4. 사용자 등급 필요(userId로 사용자 등급 찾아서 활용)
-     */
-//    @Transactional
-//    public Order createOrder(Long userId,Long itemId,int quantity)
-//    {
-//        // 사용자 찾음
-//        User findUser = userService.findById(userId);
-//        // 상품 찾음
-//        Item findItem = itemService.findById(itemId);
-//        // 주문 상품 만듬
-//        OrderItem orderItem = OrderItem.createOrderItem(quantity, findItem);
-//        Order order = Order.createOrder(findUser, orderItem);
-//        order.place();
-//        int totalOrderPrice = order.getTotalOrderPrice();
-//        DiscountPolicy discountPolicy = new FixedDiscountByGradePolicy();
-//        int discountPrice = discountPolicy.discount(findUser, totalOrderPrice);
-//        order.discountOrderPrice(discountPrice);
-//        findUser.addTotalOrderPriceForGrade(order.getTotalOrderPrice());
-//        return orderRepository.save(order);
-//    }
 
     @Transactional
     public Order createOrder(OrderRequestDto orderRequestDto) {
@@ -73,15 +49,15 @@ public class OrderService {
         Money discountPrice = discountPolicy.discount(findUser, totalOrderPrice);
         // order entity에 실제 할인 가격 적용하기
         order.setTotalMoney(discountPrice);
-        // 구매 금액별 실시간 등급 산정을 위한 로직
+        // 구매 금액별 실시간 등급 산정을 위한 로직 - 사용자의 전체 결제 가격에 추가한다.
         findUser.addTotalOrderPriceForGrade(order.getTotalMoney());
         return orderRepository.save(order);
     }
 
     @Transactional
-    public void payOrder(Long orderId) {
+    public void payed(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(IllegalStateException::new);
-        // order.payed 처럼 계산하는 로직 추가
+        order.payedOrder();
     }
 
     @Transactional

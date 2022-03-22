@@ -12,6 +12,9 @@ import project.finaltoyproject.domain.order.dto.OrderSearch;
 import project.finaltoyproject.domain.user.User;
 import project.finaltoyproject.service.OrderService;
 import project.finaltoyproject.util.exeption.ClientInvalidInputException;
+import retrofit2.http.Path;
+
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -21,11 +24,21 @@ public class OrderController {
 
     private final OrderService orderService;
 
+
     @PostMapping
     public Long createOrder(@RequestBody OrderRequestDto orderRequestDto)
     {
         return orderService.createOrder(orderRequestDto).getId();
     }
+
+    @PostMapping("/{id}/pay")
+    public String payOrder(@PathVariable("id") Long id)
+    {
+        orderService.payed(id);
+        return "pay order success";
+    }
+
+
 
     // TODO : MVC2의 타입 컨버터를 공부해야 해결할 수 있는 문제
     @GetMapping
@@ -34,11 +47,10 @@ public class OrderController {
 
         Page<Order> allOrders = orderService.findAllOrders(pageable, orderSearch);
         System.out.println(allOrders);
-     //   System.out.println(allOrders.getContent().get(0).getOrderItems().get(0).getItem().getItemName());
+
         return allOrders.map(p ->
                 new OrderResponseDto(p.getId(),p.getOrderState(), p.getTotalMoney(), p.getUser().getUsername(),
-                        p.getOrderItems().stream().findFirst().orElse(null).getItem().getItemName(),
-                        p.getOrderItems().stream().findFirst().orElse(null).getItem().getQuantity())
+                        p.getOrderItems().stream().map(o->new OrderResponseDto.OrderItemResponseDto(o.getName())).collect(Collectors.toList()))
                         );
     }
 
