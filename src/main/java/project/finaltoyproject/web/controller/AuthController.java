@@ -20,7 +20,7 @@ import project.finaltoyproject.service.UserService;
 import javax.validation.Valid;
 
 @RestController
-@Tag(name = "인증 관련 컨트롤러")
+@Tag(name = "Auth Controller",description = "인증 관리 컨트롤러입니다")
 @RequestMapping("/api")
 public class AuthController {
 

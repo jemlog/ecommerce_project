@@ -33,6 +33,7 @@ public class PostsService {
 
     @Transactional
     public void delete(Long id) throws ClientInvalidInputException {
+
         Optional<Posts> findPosts = postsRepository.findById(id);
         Posts posts = findPosts.orElseThrow(() -> new ClientInvalidInputException("사용자가 잘못된 값을 입력했습니다."));
         postsRepository.delete(posts);

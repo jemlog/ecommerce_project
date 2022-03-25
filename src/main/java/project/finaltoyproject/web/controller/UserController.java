@@ -13,7 +13,7 @@ import project.finaltoyproject.service.UserService;
 import javax.validation.Valid;
 
 @RestController
-@Tag(name = "회원 관리 컨트롤러입니다.")
+@Tag(name = "User Controller",description = "회원 관리 컨트롤러입니다")
 @RequestMapping("/api")
 public class UserController {
 

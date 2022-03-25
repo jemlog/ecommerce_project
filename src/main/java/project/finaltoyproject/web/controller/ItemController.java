@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@Tag(name = "상품 관리 컨트롤러입니다.")
+@Tag(name = "Item Controller",description = "상품 관리 컨트롤러입니다")
 @RequiredArgsConstructor
 @RequestMapping("/items")
 public class ItemController {

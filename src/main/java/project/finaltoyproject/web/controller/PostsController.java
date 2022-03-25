@@ -20,8 +20,8 @@ import project.finaltoyproject.util.exeption.SessionRemoveException;
 public class PostsController {
 
     private final PostsService postService;
-
     private final UserService userService;
+
     @GetMapping
     public Page<PostsResponseDto> findAll(@PageableDefault(size = 20) Pageable pageable)
     {
@@ -51,6 +51,7 @@ public class PostsController {
 
     @DeleteMapping("/{id}")
     public String deletePosts(@PathVariable("id") Long id) throws ClientInvalidInputException {
+
         postService.delete(id);
         return "delete!";
     }

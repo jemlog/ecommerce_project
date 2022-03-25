@@ -28,7 +28,7 @@ public class OrderItem extends BaseEntity {
 
     // item의 name이다.
     private String name;
-    //private int orderPrice;
+
 
     private int orderQuantity;
 

@@ -19,7 +19,7 @@ import retrofit2.http.Path;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Tag(name = "order controller",description = "주문 관리 컨트롤러입니다.")
+@Tag(name = "order controller",description = "주문 관리 컨트롤러입니다")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/orders")

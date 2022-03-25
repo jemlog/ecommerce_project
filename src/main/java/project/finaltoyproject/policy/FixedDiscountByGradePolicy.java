@@ -17,6 +17,7 @@ public class FixedDiscountByGradePolicy implements DiscountPolicy{
 
         Grade grade = user.getGrade();
         Money resultPrice = Money.ZERO;
+
         switch (grade){
             case BRONZE:
                // resultPrice =  orderPrice * BRONZE_DISCOUNT_RATE / 100;
@@ -32,6 +33,7 @@ public class FixedDiscountByGradePolicy implements DiscountPolicy{
                 resultPrice = orderPrice.times(VIP_DISCOUNT_RATE);
                 break;
         }
+
         return resultPrice;
 
     }

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Tag(name = "health Controller")
+@Tag(name = "health check controller")
 public class HealthController {
 
     @Operation(summary = "health check method",description = "health check will occur",tags = {"hello"})
